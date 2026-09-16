@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15 Landing Page Styles Showcase</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:'Segoe UI', -apple-system, sans-serif; }
+  section { min-height:90vh; padding:90px 30px 50px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+  .tag { position:absolute; top:20px; left:30px; font-size:11px; letter-spacing:2px; text-transform:uppercase; opacity:0.55; }
+  button { font-family:inherit; }
+
+  /* ===== NAV ===== */
+  .nav { position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(10,10,10,0.9); backdrop-filter:blur(10px); padding:12px 20px; display:flex; gap:6px; flex-wrap:wrap; justify-content:center; }
+  .nav a { color:#fff; text-decoration:none; font-size:11px; padding:6px 12px; border-radius:20px; transition:0.25s; white-space:nowrap; }
+  .nav a:hover { background:rgba(255,255,255,0.2); }
+
+  /* ===== 1. BLACK & WHITE MINIMAL ===== */
+  #s1 { background:#fff; color:#000; flex-direction:column; text-align:center; border-bottom:1px solid #eee; }
+  #s1 .label { letter-spacing:4px; font-size:12px; margin-bottom:18px; color:#888; }
+  #s1 h1 { font-size:64px; font-weight:800; line-height:1.1; max-width:750px; margin-bottom:20px; }
+  #s1 p { font-size:17px; color:#555; max-width:480px; margin-bottom:35px; }
+  .btn-bw { padding:15px 38px; background:#000; color:#fff; border:none; font-size:14px; letter-spacing:1px; cursor:pointer; transition:0.3s; }
+  .btn-bw:hover { background:#333; transform:translateY(-2px); }
+
+  /* ===== 2. VIBRANT GRADIENT ===== */
+  #s2 { background:linear-gradient(135deg,#ff6b6b 0%,#f7b733 25%,#6c5ce7 60%,#00d2ff 100%); color:#fff; flex-direction:column; text-align:center; }
+  #s2::before { content:''; position:absolute; width:350px; height:350px; background:rgba(255,255,255,0.15); border-radius:50%; top:-100px; left:-100px; filter:blur(40px); }
+  #s2::after { content:''; position:absolute; width:280px; height:280px; background:rgba(255,255,255,0.15); border-radius:50%; bottom:-80px; right:-80px; filter:blur(40px); }
+  #s2 h1 { font-size:58px; font-weight:900; margin-bottom:18px; z-index:1; text-shadow:0 4px 20px rgba(0,0,0,0.2); }
+  #s2 p { font-size:18px; max-width:520px; margin-bottom:30px; z-index:1; }
+  .btn-vibrant { padding:16px 40px; background:#fff; color:#ff6b6b; border:none; border-radius:50px; font-size:15px; font-weight:700; cursor:pointer; z-index:1; box-shadow:0 10px 30px rgba(0,0,0,0.2); transition:0.3s; }
+  .btn-vibrant:hover { transform:scale(1.05) translateY(-3px); }
+
+  /* ===== 3. 3D DEPTH ===== */
+  #s3 { background:linear-gradient(180deg,#1a1a2e 0%,#16213e 100%); color:#fff; perspective:1000px; }
+  .card-3d { background:linear-gradient(145deg,#2c2c54,#1a1a2e); padding:55px; border-radius:20px; max-width:560px; text-align:center; box-shadow:20px 20px 60px #0d0d1a,-20px -20px 60px #2a2a5c; transform:rotateY(-5deg) rotateX(5deg); transition:transform 0.4s; border:1px solid rgba(255,255,255,0.1); }
+  .card-3d:hover { transform:rotateY(0) rotateX(0) translateY(-8px); }
+  .card-3d h1 { font-size:38px; margin-bottom:16px; background:linear-gradient(90deg,#a29bfe,#74b9ff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .card-3d p { color:#b2b2d0; margin-bottom:28px; font-size:15px; }
+  .btn-3d { padding:15px 38px; background:linear-gradient(90deg,#a29bfe,#74b9ff); color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:600; cursor:pointer; box-shadow:0 10px 30px rgba(116,185,255,0.4); transition:0.3s; }
+  .btn-3d:hover { transform:translateY(-3px); }
+
+  /* ===== 4. INTERACTIVE CARDS ===== */
+  #s4 { background:#f4f4f9; flex-direction:column; text-align:center; }
+  #s4 h1 { font-size:48px; margin-bottom:16px; color:#2d3436; }
+  #s4 p { font-size:16px; color:#636e72; max-width:480px; margin-bottom:35px; }
+  .int-grid { display:flex; gap:18px; flex-wrap:wrap; justify-content:center; }
+  .int-card { background:#fff; padding:28px; border-radius:16px; width:190px; box-shadow:0 5px 20px rgba(0,0,0,0.05); cursor:pointer; transition:all 0.3s; border:2px solid transparent; }
+  .int-card:hover { transform:translateY(-8px) scale(1.03); box-shadow:0 20px 40px rgba(108,92,231,0.2); border-color:#6c5ce7; }
+  .int-card .icon { font-size:32px; margin-bottom:12px; transition:transform 0.3s; }
+  .int-card:hover .icon { transform:scale(1.2) rotate(10deg); }
+  .int-card h3 { color:#2d3436; font-size:15px; margin-bottom:6px; }
+  .int-card p { font-size:12px; color:#999; margin:0; }
+
+  /* ===== 5. DARK NEON ===== */
+  #s5 { background:#0a0e17; color:#fff; flex-direction:column; text-align:center; }
+  #s5 .grid-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(0,255,200,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,200,0.05) 1px,transparent 1px); background-size:40px 40px; }
+  #s5 h1 { font-size:54px; font-weight:800; z-index:1; margin-bottom:18px; text-shadow:0 0 10px #00ffc8,0 0 20px #00ffc8,0 0 40px #00ffc8; }
+  #s5 p { z-index:1; color:#8b95a5; max-width:480px; margin-bottom:30px; font-size:16px; }
+  .btn-neon { z-index:1; padding:15px 38px; background:transparent; color:#00ffc8; border:2px solid #00ffc8; border-radius:6px; font-size:14px; cursor:pointer; transition:0.3s; text-shadow:0 0 10px #00ffc8; }
+  .btn-neon:hover { background:#00ffc8; color:#0a0e17; box-shadow:0 0 30px #00ffc8; text-shadow:none; }
+
+  /* ===== 6. GLASSMORPHISM ===== */
+  #s6 { background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); }
+  .glass-card { background:rgba(255,255,255,0.15); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.3); border-radius:24px; padding:55px; max-width:520px; text-align:center; color:#fff; box-shadow:0 8px 32px rgba(0,0,0,0.2); }
+  .glass-card h1 { font-size:40px; margin-bottom:18px; }
+  .glass-card p { margin-bottom:26px; opacity:0.9; font-size:15px; }
+  .glass-input { width:100%; padding:13px 18px; border-radius:12px; border:none; background:rgba(255,255,255,0.2); color:#fff; margin-bottom:14px; font-size:14px; }
+  .glass-input::placeholder { color:rgba(255,255,255,0.7); }
+  .btn-glass { width:100%; padding:13px; background:#fff; color:#764ba2; border:none; border-radius:12px; font-size:14px; font-weight:700; cursor:pointer; transition:0.3s; }
+  .btn-glass:hover { transform:translateY(-2px); }
+
+  /* ===== 7. NEO-BRUTALIST ===== */
+  #s7 { background:#fff59d; }
+  .brutal-box { background:#fff; border:5px solid #000; padding:50px; max-width:560px; box-shadow:12px 12px 0 #000; }
+  .brutal-box h1 { font-size:48px; font-weight:900; text-transform:uppercase; margin-bottom:18px; line-height:1; }
+  .brutal-box p { font-size:15px; margin-bottom:22px; border-top:3px solid #000; border-bottom:3px solid #000; padding:14px 0; }
+  .btn-brutal { background:#ff5252; border:4px solid #000; padding:13px 30px; font-weight:800; text-transform:uppercase; box-shadow:6px 6px 0 #000; cursor:pointer; transition:0.15s; }
+  .btn-brutal:hover { transform:translate(3px,3px); box-shadow:3px 3px 0 #000; }
+
+  /* ===== 8. RETRO/VINTAGE ===== */
+  #s8 { background:#f5ecd9; color:#5c3d2e; flex-direction:column; text-align:center; }
+  .retro-sun { width:130px; height:130px; border-radius:50%; background:linear-gradient(180deg,#ff6b35,#f7c548); margin-bottom:-30px; z-index:0; }
+  .retro-content { background:#fff8ec; border:3px solid #5c3d2e; padding:45px 55px; z-index:1; }
+  #s8 h1 { font-family:Georgia,serif; font-size:44px; margin-bottom:14px; }
+  #s8 p { font-family:Georgia,serif; font-size:16px; margin-bottom:22px; }
+  .btn-retro { background:#c1502e; color:#fff8ec; border:none; padding:13px 32px; font-family:Georgia,serif; font-size:14px; letter-spacing:1px; cursor:pointer; }
+
+  /* ===== 9. Y2K / RETRO-FUTURISTIC ===== */
+  #s9 { background:linear-gradient(135deg,#c9a7ff,#9ad9ff,#ffc9f0); flex-direction:column; text-align:center; }
+  .y2k-bubble { width:180px; height:180px; border-radius:50%; background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,182,255,0.2)); position:absolute; }
+  .b1 { top:8%; left:8%; } .b2 { bottom:10%; right:10%; width:130px; height:130px; }
+  #s9 h1 { font-size:58px; font-weight:900; font-family:'Arial Black',sans-serif; background:linear-gradient(180deg,#fff 0%,#b8c6db 40%,#fff 50%,#8ec5fc 100%); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:18px; z-index:1; }
+  #s9 p { color:#4a4a6a; max-width:480px; margin-bottom:28px; z-index:1; font-weight:600; }
+  .btn-y2k { padding:15px 42px; border-radius:50px; border:2px solid #fff; background:rgba(255,255,255,0.4); backdrop-filter:blur(5px); color:#4a4a6a; font-weight:700; cursor:pointer; z-index:1; }
+
+  /* ===== 10. NEUMORPHISM ===== */
+  #s10 { background:#e0e5ec; flex-direction:column; text-align:center; }
+  .neu-card { background:#e0e5ec; padding:55px; border-radius:30px; box-shadow:20px 20px 60px #bebebe,-20px -20px 60px #ffffff; max-width:520px; }
+  #s10 h1 { color:#3d4451; font-size:42px; margin-bottom:18px; }
+  #s10 p { color:#6b7280; margin-bottom:28px; font-size:15px; }
+  .btn-neu { background:#e0e5ec; border:none; padding:15px 38px; border-radius:50px; box-shadow:8px 8px 16px #bebebe,-8px -8px 16px #ffffff; color:#3d4451; font-weight:600; cursor:pointer; transition:0.2s; }
+  .btn-neu:active { box-shadow:inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; }
+
+  /* ===== 11. BENTO GRID ===== */
+  #s11 { background:#f7f7f8; flex-direction:column; }
+  #s11 h1 { font-size:38px; margin-bottom:24px; color:#111; text-align:center; }
+  .bento-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,140px); gap:14px; max-width:850px; width:100%; }
+  .bento-item { background:#fff; border-radius:18px; padding:22px; box-shadow:0 2px 10px rgba(0,0,0,0.06); font-size:13px; color:#555; }
+  .bento-item.big { grid-column:span 2; grid-row:span 2; background:linear-gradient(135deg,#000,#333); color:#fff; display:flex; flex-direction:column; justify-content:flex-end; font-size:15px; }
+  .bento-item.wide { grid-column:span 2; }
+  .bento-item strong { display:block; font-size:16px; margin-bottom:6px; }
+
+  /* ===== 12. CORPORATE ===== */
+  #s12 { background:#fff; flex-direction:column; text-align:center; }
+  #s12 h1 { color:#0a2540; font-size:46px; margin-bottom:14px; }
+  #s12 p { color:#556; margin-bottom:30px; max-width:480px; }
+  .btn-corp { background:#0066ff; color:#fff; padding:14px 38px; border:none; border-radius:6px; font-weight:600; cursor:pointer; font-size:14px; }
+  .corp-stats { display:flex; gap:45px; margin-top:45px; border-top:1px solid #eee; padding-top:28px; }
+  .corp-stat h2 { color:#0066ff; font-size:32px; }
+  .corp-stat p { color:#888; font-size:12px; margin:0; }
+
+  /* ===== 13. PASTEL/SOFT ===== */
+  #s13 { background:linear-gradient(135deg,#ffd6e8,#d6e8ff,#e0ffd6); flex-direction:column; text-align:center; }
+  .pastel-card { background:rgba(255,255,255,0.65); border-radius:40px; padding:55px; max-width:520px; }
+  #s13 h1 { color:#6b5b95; font-size:42px; margin-bottom:14px; }
+  #s13 p { color:#7a6b8f; margin-bottom:26px; font-size:15px; }
+  .btn-pastel { background:#ffb6c1; color:#6b3e50; padding:14px 38px; border:none; border-radius:30px; font-weight:700; cursor:pointer; }
+
+  /* ===== 14. SPLIT-SCREEN ===== */
+  #s14 { padding:0; align-items:stretch; min-height:90vh; }
+  .split-left { flex:1; display:flex; flex-direction:column; justify-content:center; padding:60px; background:#fff; }
+  .split-left h1 { font-size:42px; color:#111; margin-bottom:16px; }
+  .split-left p { color:#666; margin-bottom:26px; }
+  .btn-split { background:#111; color:#fff; padding:14px 34px; border:none; border-radius:4px; font-weight:600; cursor:pointer; width:fit-content; }
+  .split-right { flex:1; background:linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; }
+
+  /* ===== 15. BOLD TYPOGRAPHY ===== */
+  #s15 { background:#fff200; flex-direction:column; align-items:flex-start; text-align:left; padding-left:60px; }
+  #s15 h1 { font-size:88px; font-weight:900; line-height:0.95; color:#000; max-width:800px; }
+  #s15 p { font-size:18px; margin-top:24px; max-width:500px; }
+  .btn-bold { margin-top:30px; background:#000; color:#fff200; padding:16px 40px; border:none; font-size:15px; font-weight:700; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="#s1">1. B&W Minimal</a>
+  <a href="#s2">2. Vibrant</a>
+  <a href="#s3">3. 3D Depth</a>
+  <a href="#s4">4. Interactive</a>
+  <a href="#s5">5. Dark Neon</a>
+  <a href="#s6">6. Glassmorphism</a>
+  <a href="#s7">7. Brutalist</a>
+  <a href="#s8">8. Retro</a>
+  <a href="#s9">9. Y2K</a>
+  <a href="#s10">10. Neumorphism</a>
+  <a href="#s11">11. Bento Grid</a>
+  <a href="#s12">12. Corporate</a>
+  <a href="#s13">13. Pastel</a>
+  <a href="#s14">14. Split-Screen</a>
+  <a href="#s15">15. Bold Type</a>
+</nav>
+
+<!-- 1 -->
+<section id="s1">
+  <span class="tag">01 · Black & White Minimal</span>
+  <div class="label">— NEW COLLECTION —</div>
+  <h1>Design that speaks louder in silence.</h1>
+  <p>A minimal approach for brands that let the work do the talking.</p>
+  <button class="btn-bw">EXPLORE</button>
+</section>
+
+<!-- 2 -->
+<section id="s2">
+  <span class="tag" style="color:#fff;">02 · Vibrant Gradient</span>
+  <h1>Bring color to<br>everything you build.</h1>
+  <p>The all-in-one platform for teams who refuse to be boring.</p>
+  <button class="btn-vibrant">Get Started Free</button>
+</section>
+
+<!-- 3 -->
+<section id="s3">
+  <span class="tag">03 · 3D / Depth</span>
+  <div class="card-3d">
+    <h1>Depth changes everything</h1>
+    <p>Layered design that makes your product feel premium and alive.</p>
+    <button class="btn-3d">Try It Now</button>
+  </div>
+</section>
+
+<!-- 4 -->
+<section id="s4">
+  <span class="tag">04 · Interactive Cards</span>
+  <div style="display:flex;flex-direction:column;align-items:center;">
+    <h1>Hover. Click. Explore.</h1>
+    <p>Every element responds — because engagement starts with interaction.</p>
+    <div class="int-grid">
+      <div class="int-card"><div class="icon">🚀</div><h3>Fast Setup</h3><p>Live in 5 minutes</p></div>
+      <div class="int-card"><div class="icon">🎯</div><h3>Precise</h3><p>Built for accuracy</p></div>
+      <div class="int-card"><div class="icon">🔒</div><h3>Secure</h3><p>Bank-level security</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section id="s5">
+  <div class="grid-bg"></div>
+  <span class="tag" style="color:#00ffc8;">05 · Dark Neon</span>
+  <h1>ENTER THE FUTURE</h1>
+  <p>Next-gen technology for teams building what's next.</p>
+  <button class="btn-neon">LAUNCH APP</button>
+</section>
+
+<!-- 6 -->
+<section id="s6">
+  <span class="tag" style="color:#fff;">06 · Glassmorphism</span>
+  <div class="glass-card">
+    <h1>Clarity through transparency</h1>
+    <p>Sign up and see what frosted-glass design feels like.</p>
+    <input class="glass-input" placeholder="Enter your email">
+    <button class="btn-glass">Get Early Access</button>
+  </div>
+</section>
+
+<!-- 7 -->
+<section id="s7">
+  <span class="tag">07 · Neo-Brutalist</span>
+  <div class="brutal-box">
+    <h1>NO FLUFF. JUST RESULTS.</h1>
+    <p>Raw, honest, unapologetically bold design for brands that stand out.</p>
+    <button class="btn-brutal">SIGN UP NOW</button>
+  </div>
+</section>
+
+<!-- 8 -->
+<section id="s8">
+  <span class="tag">08 · Retro / Vintage</span>
+  <div style="display:flex;flex-direction:column;align-items:center;">
+    <div class="retro-sun"></div>
+    <div class="retro-content">
+      <h1>Good things, made slow.</h1>
+      <p>Crafted the old-fashioned way — with care, not shortcuts.</p>
+      <button class="btn-retro">DISCOVER MORE</button>
+    </div>
+  </div>
+</section>
+
+<!-- 9 -->
+<section id="s9">
+  <div class="y2k-bubble b1"></div>
+  <div class="y2k-bubble b2"></div>
+  <span class="tag">09 · Y2K / Retro-Futuristic</span>
+  <h1>PLUG INTO<br>TOMORROW</h1>
+  <p>Chrome, bubbles, and a whole lot of early-internet nostalgia.</p>
+  <button class="btn-y2k">ENTER SITE</button>
+</section>
+
+<!-- 10 -->
+<section id="s10">
+  <span class="tag">10 · Neumorphism</span>
+  <div class="neu-card">
+    <h1>Soft. Subtle. Seamless.</h1>
+    <p>An interface so smooth, it feels like it's carved from the screen itself.</p>
+    <button class="btn-neu">Continue</button>
+  </div>
+</section>
+
+<!-- 11 -->
+<section id="s11">
+  <span class="tag">11 · Bento Grid</span>
+  <h1>Everything you need, organized beautifully</h1>
+  <div class="bento-grid">
+    <div class="bento-item big"><strong>Analytics</strong>Real-time data at a glance</div>
+    <div class="bento-item">⚡ Speed</div>
+    <div class="bento-item">🔐 Security</div>
+    <div class="bento-item wide">🌍 Global CDN — 99.9% uptime</div>
+    <div class="bento-item">📱 Mobile Ready</div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section id="s12">
+  <span class="tag">12 · Corporate / Professional</span>
+  <h1>Trusted by enterprise teams worldwide</h1>
+  <p>Reliable, secure, and scalable solutions for businesses that can't afford downtime.</p>
+  <button class="btn-corp">Schedule a Demo</button>
+  <div class="corp-stats">
+    <div class="corp-stat"><h2>10k+</h2><p>Companies</p></div>
+    <div class="corp-stat"><h2>99.9%</h2><p>Uptime</p></div>
+    <div class="corp-stat"><h2>24/7</h2><p>Support</p></div>
+  </div>
+</section>
+
+<!-- 13 -->
+<section id="s13">
+  <span class="tag">13 · Pastel / Soft</span>
+  <div class="pastel-card">
+    <h1>Wellness starts here 🌸</h1>
+    <p>A gentle space designed to help you feel calm, cared for, and in control.</p>
+    <button class="btn-pastel">Start Your Journey</button>
+  </div>
+</section>
+
+<!-- 14 -->
+<section id="s14">
+  <div class="split-left">
+    <span class="tag" style="position:static;margin-bottom:20px;display:block;">14 · Split-Screen</span>
+    <h1>See both sides of the story</h1>
+    <p>Half message, half visual — a layout that balances content and impact equally.</p>
+    <button class="btn-split">Learn More</button>
+  </div>
+  <div class="split-right">[ Image / Product Visual ]</div>
+</section>
+
+<!-- 15 -->
+<section id="s15">
+  <span class="tag">15 · Bold Typography</span>
+  <h1>WORDS<br>ARE THE<br>DESIGN.</h1>
+  <p>When your message is strong enough, it doesn't need decoration.</p>
+  <button class="btn-bold">READ MORE →</button>
+</section>
+
+</body>
+</html>
