@@ -2,29 +2,56 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>15 Landing Page Styles Showcase</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>15 Landing Page Styles — Fullpage Push Scroll</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  html, body { overflow-x:hidden; width:100%; }
+  html, body { height:100%; overflow:hidden; overscroll-behavior:none; }
   body { font-family:'Segoe UI', -apple-system, sans-serif; }
-  section { min-height:90vh; padding:110px 20px 50px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-  .tag { position:absolute; top:16px; left:20px; font-size:10px; letter-spacing:2px; text-transform:uppercase; opacity:0.55; }
   button { font-family:inherit; cursor:pointer; }
-  img, .card-3d, .brutal-box, .glass-card, .neu-card, .pastel-card, .retro-content { max-width:100%; }
 
-  /* ===== NAV (swipeable on mobile, wraps + centers on desktop) ===== */
+  /* ===== FULLPAGE MECHANISM ===== */
+  #fullpage-container {
+    position:fixed; top:0; left:0; width:100%;
+    height:100vh; height:100dvh; overflow:hidden;
+  }
+  .fp-section {
+    position:absolute; top:0; left:0; width:100%;
+    height:100%; display:flex; align-items:center; justify-content:center;
+    padding:110px 20px 50px; overflow:hidden;
+    transition: transform 0.9s cubic-bezier(0.83,0,0.17,1);
+    will-change: transform;
+  }
+  .tag { position:absolute; top:16px; left:20px; font-size:10px; letter-spacing:2px; text-transform:uppercase; opacity:0.55; }
+  .card-3d, .brutal-box, .glass-card, .neu-card, .pastel-card, .retro-content { max-width:100%; }
+
+  /* ===== TOP NAV (swipeable strip) ===== */
   .nav { position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(10,10,10,0.92); backdrop-filter:blur(10px); padding:10px 15px; display:flex; gap:6px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
   .nav::-webkit-scrollbar { display:none; }
   .nav a { flex:0 0 auto; color:#fff; text-decoration:none; font-size:11px; padding:6px 12px; border-radius:20px; transition:0.25s; white-space:nowrap; }
-  .nav a:hover { background:rgba(255,255,255,0.2); }
-  @media (min-width:900px) {
-    .nav { flex-wrap:wrap; overflow-x:visible; justify-content:center; }
+  .nav a:hover, .nav a.active { background:rgba(255,255,255,0.25); }
+  @media (min-width:900px) { .nav { flex-wrap:wrap; overflow-x:visible; justify-content:center; } }
+
+  /* ===== DOT NAVIGATION ===== */
+  .dot-nav {
+    position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:1000;
+    display:flex; flex-direction:column; gap:9px;
+    background:rgba(0,0,0,0.25); padding:12px 7px; border-radius:20px; backdrop-filter:blur(6px);
   }
+  .dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.45); border:none; transition:0.3s; padding:0; }
+  .dot.active { background:#fff; transform:scale(1.4); }
+  @media (max-width:480px) { .dot-nav { right:8px; gap:7px; padding:10px 5px; } .dot { width:6px; height:6px; } }
+
+  /* ===== PROGRESS COUNTER ===== */
+  .progress { position:fixed; bottom:18px; left:20px; z-index:1000; color:#fff; font-size:12px; letter-spacing:1px; mix-blend-mode:difference; }
+
+  /* ===== SCROLL HINT (first section only) ===== */
+  .scroll-hint { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:999; font-size:12px; color:#000; opacity:0.6; letter-spacing:1px; animation:bounce 1.6s infinite; transition:opacity 0.4s; text-align:center; }
+  .scroll-hint.hide { opacity:0; pointer-events:none; }
+  @keyframes bounce { 0%,100%{ transform:translateX(-50%) translateY(0); } 50%{ transform:translateX(-50%) translateY(8px); } }
 
   /* ===== 1. BLACK & WHITE MINIMAL ===== */
-  #s1 { background:#fff; color:#000; flex-direction:column; text-align:center; border-bottom:1px solid #eee; }
+  #s1 { background:#fff; color:#000; flex-direction:column; text-align:center; }
   #s1 .label { letter-spacing:4px; font-size:clamp(10px,2.5vw,12px); margin-bottom:18px; color:#888; }
   #s1 h1 { font-size:clamp(32px,8vw,64px); font-weight:800; line-height:1.1; max-width:750px; margin-bottom:20px; }
   #s1 p { font-size:clamp(14px,3.5vw,17px); color:#555; max-width:480px; margin-bottom:30px; }
@@ -95,7 +122,7 @@
   #s8 p { font-family:Georgia,serif; font-size:clamp(13px,3vw,16px); margin-bottom:20px; }
   .btn-retro { background:#c1502e; color:#fff8ec; border:none; padding:12px 28px; font-family:Georgia,serif; font-size:13px; letter-spacing:1px; }
 
-  /* ===== 9. Y2K / RETRO-FUTURISTIC ===== */
+  /* ===== 9. Y2K ===== */
   #s9 { background:linear-gradient(135deg,#c9a7ff,#9ad9ff,#ffc9f0); flex-direction:column; text-align:center; }
   .y2k-bubble { border-radius:50%; background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,182,255,0.2)); position:absolute; }
   .b1 { top:8%; left:6%; width:110px; height:110px; }
@@ -115,7 +142,7 @@
   /* ===== 11. BENTO GRID ===== */
   #s11 { background:#f7f7f8; flex-direction:column; }
   #s11 h1 { font-size:clamp(22px,5.5vw,38px); margin-bottom:24px; color:#111; text-align:center; }
-  .bento-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,140px); gap:12px; max-width:850px; width:100%; }
+  .bento-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,130px); gap:12px; max-width:850px; width:100%; }
   .bento-item { background:#fff; border-radius:18px; padding:20px; box-shadow:0 2px 10px rgba(0,0,0,0.06); font-size:13px; color:#555; }
   .bento-item.big { grid-column:span 2; grid-row:span 2; background:linear-gradient(135deg,#000,#333); color:#fff; display:flex; flex-direction:column; justify-content:flex-end; font-size:14px; }
   .bento-item.wide { grid-column:span 2; }
@@ -126,11 +153,11 @@
   #s12 h1 { color:#0a2540; font-size:clamp(26px,6vw,46px); margin-bottom:14px; }
   #s12 p { color:#556; margin-bottom:28px; max-width:480px; font-size:clamp(13px,3vw,16px); }
   .btn-corp { background:#0066ff; color:#fff; padding:13px 32px; border:none; border-radius:6px; font-weight:600; font-size:14px; }
-  .corp-stats { display:flex; gap:30px; flex-wrap:wrap; justify-content:center; margin-top:40px; border-top:1px solid #eee; padding-top:26px; }
+  .corp-stats { display:flex; gap:30px; flex-wrap:wrap; justify-content:center; margin-top:34px; border-top:1px solid #eee; padding-top:22px; }
   .corp-stat h2 { color:#0066ff; font-size:clamp(24px,5vw,32px); }
   .corp-stat p { color:#888; font-size:12px; margin:0; }
 
-  /* ===== 13. PASTEL/SOFT ===== */
+  /* ===== 13. PASTEL ===== */
   #s13 { background:linear-gradient(135deg,#ffd6e8,#d6e8ff,#e0ffd6); flex-direction:column; text-align:center; }
   .pastel-card { background:rgba(255,255,255,0.65); border-radius:32px; padding:clamp(30px,6vw,55px); width:100%; max-width:520px; }
   #s13 h1 { color:#6b5b95; font-size:clamp(26px,6vw,42px); margin-bottom:14px; }
@@ -138,12 +165,12 @@
   .btn-pastel { background:#ffb6c1; color:#6b3e50; padding:13px 32px; border:none; border-radius:30px; font-weight:700; }
 
   /* ===== 14. SPLIT-SCREEN ===== */
-  #s14 { padding:0; align-items:stretch; min-height:90vh; flex-direction:row; }
+  #s14 { padding:0; align-items:stretch; flex-direction:row; }
   .split-left { flex:1; display:flex; flex-direction:column; justify-content:center; padding:clamp(30px,6vw,60px); background:#fff; }
   .split-left h1 { font-size:clamp(26px,6vw,42px); color:#111; margin-bottom:14px; }
   .split-left p { color:#666; margin-bottom:22px; font-size:clamp(13px,3vw,16px); }
   .btn-split { background:#111; color:#fff; padding:13px 30px; border:none; border-radius:4px; font-weight:600; width:fit-content; }
-  .split-right { flex:1; background:linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; color:#fff; font-size:clamp(14px,3vw,18px); min-height:280px; text-align:center; padding:20px; }
+  .split-right { flex:1; background:linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; color:#fff; font-size:clamp(14px,3vw,18px); text-align:center; padding:20px; }
 
   /* ===== 15. BOLD TYPOGRAPHY ===== */
   #s15 { background:#fff200; flex-direction:column; align-items:flex-start; text-align:left; padding-left:clamp(24px,6vw,60px); }
@@ -151,25 +178,18 @@
   #s15 p { font-size:clamp(14px,3.5vw,18px); margin-top:20px; max-width:500px; }
   .btn-bold { margin-top:26px; background:#000; color:#fff200; padding:14px 34px; border:none; font-size:14px; font-weight:700; }
 
-  /* ===== MOBILE LAYOUT FIXES ===== */
+  /* ===== MOBILE FIXES ===== */
   @media (max-width:768px) {
-    section { padding:80px 18px 40px; min-height:auto; }
+    .fp-section { padding:80px 18px 40px; }
     .tag { font-size:9px; }
-
     #s14 { flex-direction:column; }
-    .split-left, .split-right { width:100%; flex:none; }
-    .split-right { min-height:220px; }
-
+    .split-left, .split-right { flex:none; height:50%; }
     .bento-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:auto; }
-    .bento-item.big { grid-column:span 2; grid-row:span 1; min-height:140px; }
+    .bento-item.big { grid-column:span 2; grid-row:span 1; min-height:120px; }
     .bento-item.wide { grid-column:span 2; }
-
     .card-3d { transform:none; }
     .card-3d:hover { transform:translateY(-6px); }
-
-    .corp-stats { gap:22px; }
   }
-
   @media (max-width:420px) {
     .int-card { flex:1 1 100%; max-width:220px; }
     #s15 { padding-left:20px; }
@@ -178,182 +198,263 @@
 </head>
 <body>
 
-<nav class="nav">
-  <a href="#s1">1. B&W Minimal</a>
-  <a href="#s2">2. Vibrant</a>
-  <a href="#s3">3. 3D Depth</a>
-  <a href="#s4">4. Interactive</a>
-  <a href="#s5">5. Dark Neon</a>
-  <a href="#s6">6. Glassmorphism</a>
-  <a href="#s7">7. Brutalist</a>
-  <a href="#s8">8. Retro</a>
-  <a href="#s9">9. Y2K</a>
-  <a href="#s10">10. Neumorphism</a>
-  <a href="#s11">11. Bento Grid</a>
-  <a href="#s12">12. Corporate</a>
-  <a href="#s13">13. Pastel</a>
-  <a href="#s14">14. Split-Screen</a>
-  <a href="#s15">15. Bold Type</a>
+<nav class="nav" id="topNav">
+  <a href="#" data-index="0">1. B&W Minimal</a>
+  <a href="#" data-index="1">2. Vibrant</a>
+  <a href="#" data-index="2">3. 3D Depth</a>
+  <a href="#" data-index="3">4. Interactive</a>
+  <a href="#" data-index="4">5. Dark Neon</a>
+  <a href="#" data-index="5">6. Glassmorphism</a>
+  <a href="#" data-index="6">7. Brutalist</a>
+  <a href="#" data-index="7">8. Retro</a>
+  <a href="#" data-index="8">9. Y2K</a>
+  <a href="#" data-index="9">10. Neumorphism</a>
+  <a href="#" data-index="10">11. Bento Grid</a>
+  <a href="#" data-index="11">12. Corporate</a>
+  <a href="#" data-index="12">13. Pastel</a>
+  <a href="#" data-index="13">14. Split-Screen</a>
+  <a href="#" data-index="14">15. Bold Type</a>
 </nav>
 
-<!-- 1 -->
-<section id="s1">
-  <span class="tag">01 · Black & White Minimal</span>
-  <div class="label">— NEW COLLECTION —</div>
-  <h1>Design that speaks louder in silence.</h1>
-  <p>A minimal approach for brands that let the work do the talking.</p>
-  <button class="btn-bw">EXPLORE</button>
-</section>
+<div class="dot-nav" id="dotNav"></div>
+<div class="progress" id="progress">01 / 15</div>
+<div class="scroll-hint" id="scrollHint">↓ SCROLL TO EXPLORE</div>
 
-<!-- 2 -->
-<section id="s2">
-  <span class="tag" style="color:#fff;">02 · Vibrant Gradient</span>
-  <h1>Bring color to<br>everything you build.</h1>
-  <p>The all-in-one platform for teams who refuse to be boring.</p>
-  <button class="btn-vibrant">Get Started Free</button>
-</section>
+<div id="fullpage-container">
 
-<!-- 3 -->
-<section id="s3">
-  <span class="tag">03 · 3D / Depth</span>
-  <div class="card-3d">
-    <h1>Depth changes everything</h1>
-    <p>Layered design that makes your product feel premium and alive.</p>
-    <button class="btn-3d">Try It Now</button>
-  </div>
-</section>
+  <section class="fp-section" id="s1">
+    <span class="tag">01 · Black & White Minimal</span>
+    <div class="label">— NEW COLLECTION —</div>
+    <h1>Design that speaks louder in silence.</h1>
+    <p>A minimal approach for brands that let the work do the talking.</p>
+    <button class="btn-bw">EXPLORE</button>
+  </section>
 
-<!-- 4 -->
-<section id="s4">
-  <span class="tag">04 · Interactive Cards</span>
-  <div style="display:flex;flex-direction:column;align-items:center;">
-    <h1>Hover. Click. Explore.</h1>
-    <p>Every element responds — because engagement starts with interaction.</p>
-    <div class="int-grid">
-      <div class="int-card"><div class="icon">🚀</div><h3>Fast Setup</h3><p>Live in 5 minutes</p></div>
-      <div class="int-card"><div class="icon">🎯</div><h3>Precise</h3><p>Built for accuracy</p></div>
-      <div class="int-card"><div class="icon">🔒</div><h3>Secure</h3><p>Bank-level security</p></div>
+  <section class="fp-section" id="s2">
+    <span class="tag" style="color:#fff;">02 · Vibrant Gradient</span>
+    <h1>Bring color to<br>everything you build.</h1>
+    <p>The all-in-one platform for teams who refuse to be boring.</p>
+    <button class="btn-vibrant">Get Started Free</button>
+  </section>
+
+  <section class="fp-section" id="s3">
+    <span class="tag">03 · 3D / Depth</span>
+    <div class="card-3d">
+      <h1>Depth changes everything</h1>
+      <p>Layered design that makes your product feel premium and alive.</p>
+      <button class="btn-3d">Try It Now</button>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 5 -->
-<section id="s5">
-  <div class="grid-bg"></div>
-  <span class="tag" style="color:#00ffc8;">05 · Dark Neon</span>
-  <h1>ENTER THE FUTURE</h1>
-  <p>Next-gen technology for teams building what's next.</p>
-  <button class="btn-neon">LAUNCH APP</button>
-</section>
-
-<!-- 6 -->
-<section id="s6">
-  <span class="tag" style="color:#fff;">06 · Glassmorphism</span>
-  <div class="glass-card">
-    <h1>Clarity through transparency</h1>
-    <p>Sign up and see what frosted-glass design feels like.</p>
-    <input class="glass-input" placeholder="Enter your email">
-    <button class="btn-glass">Get Early Access</button>
-  </div>
-</section>
-
-<!-- 7 -->
-<section id="s7">
-  <span class="tag">07 · Neo-Brutalist</span>
-  <div class="brutal-box">
-    <h1>NO FLUFF. JUST RESULTS.</h1>
-    <p>Raw, honest, unapologetically bold design for brands that stand out.</p>
-    <button class="btn-brutal">SIGN UP NOW</button>
-  </div>
-</section>
-
-<!-- 8 -->
-<section id="s8">
-  <span class="tag">08 · Retro / Vintage</span>
-  <div style="display:flex;flex-direction:column;align-items:center;">
-    <div class="retro-sun"></div>
-    <div class="retro-content">
-      <h1>Good things, made slow.</h1>
-      <p>Crafted the old-fashioned way — with care, not shortcuts.</p>
-      <button class="btn-retro">DISCOVER MORE</button>
+  <section class="fp-section" id="s4">
+    <span class="tag">04 · Interactive Cards</span>
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <h1>Hover. Click. Explore.</h1>
+      <p>Every element responds — because engagement starts with interaction.</p>
+      <div class="int-grid">
+        <div class="int-card"><div class="icon">🚀</div><h3>Fast Setup</h3><p>Live in 5 minutes</p></div>
+        <div class="int-card"><div class="icon">🎯</div><h3>Precise</h3><p>Built for accuracy</p></div>
+        <div class="int-card"><div class="icon">🔒</div><h3>Secure</h3><p>Bank-level security</p></div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 9 -->
-<section id="s9">
-  <div class="y2k-bubble b1"></div>
-  <div class="y2k-bubble b2"></div>
-  <span class="tag">09 · Y2K / Retro-Futuristic</span>
-  <h1>PLUG INTO<br>TOMORROW</h1>
-  <p>Chrome, bubbles, and a whole lot of early-internet nostalgia.</p>
-  <button class="btn-y2k">ENTER SITE</button>
-</section>
+  <section class="fp-section" id="s5">
+    <div class="grid-bg"></div>
+    <span class="tag" style="color:#00ffc8;">05 · Dark Neon</span>
+    <h1>ENTER THE FUTURE</h1>
+    <p>Next-gen technology for teams building what's next.</p>
+    <button class="btn-neon">LAUNCH APP</button>
+  </section>
 
-<!-- 10 -->
-<section id="s10">
-  <span class="tag">10 · Neumorphism</span>
-  <div class="neu-card">
-    <h1>Soft. Subtle. Seamless.</h1>
-    <p>An interface so smooth, it feels like it's carved from the screen itself.</p>
-    <button class="btn-neu">Continue</button>
-  </div>
-</section>
+  <section class="fp-section" id="s6">
+    <span class="tag" style="color:#fff;">06 · Glassmorphism</span>
+    <div class="glass-card">
+      <h1>Clarity through transparency</h1>
+      <p>Sign up and see what frosted-glass design feels like.</p>
+      <input class="glass-input" placeholder="Enter your email">
+      <button class="btn-glass">Get Early Access</button>
+    </div>
+  </section>
 
-<!-- 11 -->
-<section id="s11">
-  <span class="tag">11 · Bento Grid</span>
-  <h1>Everything you need, organized beautifully</h1>
-  <div class="bento-grid">
-    <div class="bento-item big"><strong>Analytics</strong>Real-time data at a glance</div>
-    <div class="bento-item">⚡ Speed</div>
-    <div class="bento-item">🔐 Security</div>
-    <div class="bento-item wide">🌍 Global CDN — 99.9% uptime</div>
-    <div class="bento-item">📱 Mobile Ready</div>
-  </div>
-</section>
+  <section class="fp-section" id="s7">
+    <span class="tag">07 · Neo-Brutalist</span>
+    <div class="brutal-box">
+      <h1>NO FLUFF. JUST RESULTS.</h1>
+      <p>Raw, honest, unapologetically bold design for brands that stand out.</p>
+      <button class="btn-brutal">SIGN UP NOW</button>
+    </div>
+  </section>
 
-<!-- 12 -->
-<section id="s12">
-  <span class="tag">12 · Corporate / Professional</span>
-  <h1>Trusted by enterprise teams worldwide</h1>
-  <p>Reliable, secure, and scalable solutions for businesses that can't afford downtime.</p>
-  <button class="btn-corp">Schedule a Demo</button>
-  <div class="corp-stats">
-    <div class="corp-stat"><h2>10k+</h2><p>Companies</p></div>
-    <div class="corp-stat"><h2>99.9%</h2><p>Uptime</p></div>
-    <div class="corp-stat"><h2>24/7</h2><p>Support</p></div>
-  </div>
-</section>
+  <section class="fp-section" id="s8">
+    <span class="tag">08 · Retro / Vintage</span>
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div class="retro-sun"></div>
+      <div class="retro-content">
+        <h1>Good things, made slow.</h1>
+        <p>Crafted the old-fashioned way — with care, not shortcuts.</p>
+        <button class="btn-retro">DISCOVER MORE</button>
+      </div>
+    </div>
+  </section>
 
-<!-- 13 -->
-<section id="s13">
-  <span class="tag">13 · Pastel / Soft</span>
-  <div class="pastel-card">
-    <h1>Wellness starts here 🌸</h1>
-    <p>A gentle space designed to help you feel calm, cared for, and in control.</p>
-    <button class="btn-pastel">Start Your Journey</button>
-  </div>
-</section>
+  <section class="fp-section" id="s9">
+    <div class="y2k-bubble b1"></div>
+    <div class="y2k-bubble b2"></div>
+    <span class="tag">09 · Y2K / Retro-Futuristic</span>
+    <h1>PLUG INTO<br>TOMORROW</h1>
+    <p>Chrome, bubbles, and a whole lot of early-internet nostalgia.</p>
+    <button class="btn-y2k">ENTER SITE</button>
+  </section>
 
-<!-- 14 -->
-<section id="s14">
-  <div class="split-left">
-    <span class="tag" style="position:static;margin-bottom:20px;display:block;">14 · Split-Screen</span>
-    <h1>See both sides of the story</h1>
-    <p>Half message, half visual — a layout that balances content and impact equally.</p>
-    <button class="btn-split">Learn More</button>
-  </div>
-  <div class="split-right">[ Image / Product Visual ]</div>
-</section>
+  <section class="fp-section" id="s10">
+    <span class="tag">10 · Neumorphism</span>
+    <div class="neu-card">
+      <h1>Soft. Subtle. Seamless.</h1>
+      <p>An interface so smooth, it feels like it's carved from the screen itself.</p>
+      <button class="btn-neu">Continue</button>
+    </div>
+  </section>
 
-<!-- 15 -->
-<section id="s15">
-  <span class="tag">15 · Bold Typography</span>
-  <h1>WORDS<br>ARE THE<br>DESIGN.</h1>
-  <p>When your message is strong enough, it doesn't need decoration.</p>
-  <button class="btn-bold">READ MORE →</button>
-</section>
+  <section class="fp-section" id="s11">
+    <span class="tag">11 · Bento Grid</span>
+    <h1>Everything you need, organized beautifully</h1>
+    <div class="bento-grid">
+      <div class="bento-item big"><strong>Analytics</strong>Real-time data at a glance</div>
+      <div class="bento-item">⚡ Speed</div>
+      <div class="bento-item">🔐 Security</div>
+      <div class="bento-item wide">🌍 Global CDN — 99.9% uptime</div>
+      <div class="bento-item">📱 Mobile Ready</div>
+    </div>
+  </section>
 
+  <section class="fp-section" id="s12">
+    <span class="tag">12 · Corporate / Professional</span>
+    <h1>Trusted by enterprise teams worldwide</h1>
+    <p>Reliable, secure, and scalable solutions for businesses that can't afford downtime.</p>
+    <button class="btn-corp">Schedule a Demo</button>
+    <div class="corp-stats">
+      <div class="corp-stat"><h2>10k+</h2><p>Companies</p></div>
+      <div class="corp-stat"><h2>99.9%</h2><p>Uptime</p></div>
+      <div class="corp-stat"><h2>24/7</h2><p>Support</p></div>
+    </div>
+  </section>
+
+  <section class="fp-section" id="s13">
+    <span class="tag">13 · Pastel / Soft</span>
+    <div class="pastel-card">
+      <h1>Wellness starts here 🌸</h1>
+      <p>A gentle space designed to help you feel calm, cared for, and in control.</p>
+      <button class="btn-pastel">Start Your Journey</button>
+    </div>
+  </section>
+
+  <section class="fp-section" id="s14">
+    <div class="split-left">
+      <span class="tag" style="position:static;margin-bottom:20px;display:block;">14 · Split-Screen</span>
+      <h1>See both sides of the story</h1>
+      <p>Half message, half visual — a layout that balances content and impact equally.</p>
+      <button class="btn-split">Learn More</button>
+    </div>
+    <div class="split-right">[ Image / Product Visual ]</div>
+  </section>
+
+  <section class="fp-section" id="s15">
+    <span class="tag">15 · Bold Typography</span>
+    <h1>WORDS<br>ARE THE<br>DESIGN.</h1>
+    <p>When your message is strong enough, it doesn't need decoration.</p>
+    <button class="btn-bold">READ MORE →</button>
+  </section>
+
+</div>
+
+<script>
+  const sections = document.querySelectorAll('.fp-section');
+  const total = sections.length;
+  const dotNav = document.getElementById('dotNav');
+  const navLinks = document.querySelectorAll('#topNav a');
+  const progress = document.getElementById('progress');
+  const scrollHint = document.getElementById('scrollHint');
+
+  let current = 0;
+  let animating = false;
+  const DURATION = 900; // matches CSS transition time
+
+  // Build dots dynamically
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotNav.appendChild(dot);
+  }
+  const dots = document.querySelectorAll('.dot');
+
+  function updateUI() {
+    sections.forEach((sec, i) => {
+      sec.style.transform = `translateY(${(i - current) * 100}%)`;
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    navLinks.forEach((a, i) => a.classList.toggle('active', i === current));
+    progress.textContent = String(current + 1).padStart(2, '0') + ' / ' + total;
+    scrollHint.classList.toggle('hide', current !== 0);
+  }
+
+  function goTo(index) {
+    if (animating || index < 0 || index >= total || index === current) return;
+    current = index;
+    animating = true;
+    updateUI();
+    setTimeout(() => { animating = false; }, DURATION);
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  // ===== WHEEL (desktop) =====
+  window.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if (animating) return;
+    if (e.deltaY > 25) next();
+    else if (e.deltaY < -25) prev();
+  }, { passive: false });
+
+  // ===== TOUCH (mobile) =====
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (e.target.closest('.nav')) return; // allow horizontal nav swipe
+    e.preventDefault();
+  }, { passive: false });
+
+  window.addEventListener('touchend', (e) => {
+    if (animating) return;
+    const touchEndY = e.changedTouches[0].clientY;
+    const diff = touchStartY - touchEndY;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) next(); else prev();
+    }
+  });
+
+  // ===== KEYBOARD =====
+  window.addEventListener('keydown', (e) => {
+    if (animating) return;
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') { next(); e.preventDefault(); }
+    if (e.key === 'ArrowUp' || e.key === 'PageUp') { prev(); e.preventDefault(); }
+  });
+
+  // ===== TOP NAV CLICKS =====
+  navLinks.forEach((a, i) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      goTo(i);
+    });
+  });
+
+  // ===== INIT =====
+  updateUI();
+</script>
 </body>
 </html>
