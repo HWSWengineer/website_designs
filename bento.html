@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRIDLY — Everything, Organized</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', -apple-system, sans-serif; background:#f7f7f8; color:#111; }
+  a { text-decoration:none; color:inherit; }
+  .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+  .reveal { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
+  .reveal.show { opacity:1; transform:translateY(0); }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(247,247,248,0.9); backdrop-filter:blur(10px); border-bottom:1px solid #eee; }
+  .nav-inner { display:flex; justify-content:space-between; align-items:center; padding:18px 24px; max-width:1100px; margin:0 auto; }
+  .logo { font-size:20px; font-weight:800; }
+  .nav-links { display:flex; gap:30px; font-size:14px; color:#555; }
+  .nav-cta { background:#111; color:#fff; padding:10px 22px; border-radius:8px; font-size:13px; font-weight:600; }
+  .back-link { position:fixed; bottom:20px; left:20px; z-index:100; font-size:12px; background:#111; color:#fff; padding:8px 14px; border-radius:20px; }
+  .mobile-toggle { display:none; background:none; border:none; font-size:22px; }
+  @media (max-width:768px) { .nav-links { display:none; } .mobile-toggle { display:block; } }
+
+  .hero { min-height:90vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 24px 60px; }
+  .hero h1 { font-size:clamp(32px,7vw,58px); font-weight:800; max-width:750px; margin-bottom:22px; }
+  .hero p { color:#666; font-size:clamp(14px,3vw,17px); max-width:520px; margin:0 auto 34px; }
+  .btn-bento { background:#111; color:#fff; padding:15px 36px; border-radius:8px; font-weight:600; font-size:14px; display:inline-block; }
+
+  section { padding:90px 0; }
+  .section-label { text-align:center; font-size:13px; font-weight:700; color:#888; letter-spacing:2px; margin-bottom:14px; }
+  .section-title { text-align:center; font-size:clamp(26px,5vw,40px); font-weight:800; max-width:600px; margin:0 auto 50px; }
+
+  .bento-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,160px); gap:16px; }
+  .bento-item { background:#fff; border-radius:20px; padding:26px; box-shadow:0 2px 12px rgba(0,0,0,0.06); font-size:14px; color:#555; }
+  .bento-item.big { grid-column:span 2; grid-row:span 2; background:linear-gradient(135deg,#000,#333); color:#fff; display:flex; flex-direction:column; justify-content:flex-end; }
+  .bento-item.wide { grid-column:span 2; }
+  .bento-item strong { display:block; font-size:17px; margin-bottom:8px; }
+  @media (max-width:768px) { .bento-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:auto; } .bento-item.big { grid-column:span 2; grid-row:span 1; min-height:150px; } .bento-item.wide { grid-column:span 2; } }
+
+  .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .price-card { background:#fff; border-radius:18px; padding:34px; text-align:center; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
+  .price-card.featured { border:2px solid #111; }
+  .amount { font-size:36px; font-weight:800; margin:14px 0; } .amount span { font-size:13px; color:#888; font-weight:400; }
+  .price-list { list-style:none; margin:18px 0; text-align:left; font-size:13px; color:#555; }
+  .price-list li { padding:6px 0; } .price-list li::before { content:'✓ '; color:#111; font-weight:700; }
+  .btn-price { width:100%; padding:12px; border-radius:8px; border:1.5px solid #111; background:transparent; font-weight:600; }
+  .price-card.featured .btn-price { background:#111; color:#fff; }
+  @media (max-width:768px) { .pricing-grid { grid-template-columns:1fr; } }
+
+  footer { padding:50px 24px 30px; border-top:1px solid #eee; }
+  .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:30px; margin-bottom:34px; }
+  .footer-col h5 { font-size:12px; color:#999; margin-bottom:14px; letter-spacing:1px; text-transform:uppercase; }
+  .footer-col a { display:block; font-size:14px; margin-bottom:8px; color:#555; }
+  .footer-bottom { text-align:center; font-size:13px; color:#999; padding-top:20px; border-top:1px solid #eee; }
+  @media (max-width:768px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← Back to Showcase</a>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">GRIDLY</div>
+    <div class="nav-links"><a href="#product">Product</a><a href="#pricing">Pricing</a></div>
+    <a href="#pricing" class="nav-cta">Start Free</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Everything you need, organized beautifully.</h1>
+  <p>GRIDLY brings your docs, tasks, and team into one clean workspace — no clutter, no chaos.</p>
+  <a href="#pricing" class="btn-bento">Start For Free</a>
+</section>
+
+<section id="product">
+  <div class="container">
+    <div class="section-label reveal">PRODUCT</div>
+    <h2 class="section-title reveal">One workspace, endless possibilities</h2>
+    <div class="bento-grid">
+      <div class="bento-item big reveal"><strong>Real-Time Analytics</strong>See your team's progress at a glance</div>
+      <div class="bento-item reveal">⚡ Instant Sync</div>
+      <div class="bento-item reveal">🔐 Enterprise Security</div>
+      <div class="bento-item wide reveal">🌍 Available on Web, Desktop & Mobile</div>
+      <div class="bento-item reveal">🤝 Team Collaboration</div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="background:#fff;">
+  <div class="container">
+    <div class="section-label reveal">PRICING</div>
+    <h2 class="section-title reveal">Simple pricing, no surprises</h2>
+    <div class="pricing-grid">
+      <div class="price-card reveal"><h3>Free</h3><div class="amount">$0</div><ul class="price-list"><li>Up to 3 members</li><li>Basic features</li></ul><button class="btn-price">Get Started</button></div>
+      <div class="price-card featured reveal"><h3>Pro</h3><div class="amount">$12<span>/mo</span></div><ul class="price-list"><li>Unlimited members</li><li>Advanced analytics</li><li>Priority support</li></ul><button class="btn-price">Get Started</button></div>
+      <div class="price-card reveal"><h3>Enterprise</h3><div class="amount">Custom</div><ul class="price-list"><li>SSO & advanced security</li><li>Dedicated support</li></ul><button class="btn-price">Contact Us</button></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><div class="logo">GRIDLY</div><p style="color:#999;font-size:13px;margin-top:12px;">Work, organized beautifully.</p></div>
+      <div class="footer-col"><h5>Product</h5><a href="#">Features</a><a href="#">Pricing</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="#">About</a><a href="#">Blog</a></div>
+      <div class="footer-col"><h5>Resources</h5><a href="#">Docs</a><a href="#">Support</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 GRIDLY Inc.</div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.15 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

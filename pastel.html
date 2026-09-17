@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLOOM — Skincare That Loves You Back</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', -apple-system, sans-serif; background:linear-gradient(135deg,#ffd6e8,#d6e8ff,#e0ffd6); color:#6b5b95; }
+  a { text-decoration:none; color:inherit; }
+  .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+  .reveal { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
+  .reveal.show { opacity:1; transform:translateY(0); }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(255,255,255,0.4); backdrop-filter:blur(10px); }
+  .nav-inner { display:flex; justify-content:space-between; align-items:center; padding:18px 24px; max-width:1100px; margin:0 auto; }
+  .logo { font-size:22px; font-weight:800; }
+  .nav-links { display:flex; gap:28px; font-size:14px; }
+  .nav-cta { background:#ffb6c1; color:#6b3e50; padding:10px 22px; border-radius:30px; font-weight:700; font-size:13px; }
+  .back-link { position:fixed; bottom:20px; left:20px; z-index:100; font-size:12px; background:#6b5b95; color:#fff; padding:8px 14px; border-radius:20px; }
+  .mobile-toggle { display:none; background:none; border:none; font-size:22px; }
+  @media (max-width:768px) { .nav-links { display:none; } .mobile-toggle { display:block; } }
+
+  .hero { min-height:90vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 24px 60px; }
+  .hero h1 { font-size:clamp(32px,7vw,56px); font-weight:800; max-width:650px; margin-bottom:20px; }
+  .hero p { color:#7a6b8f; font-size:clamp(14px,3vw,17px); max-width:480px; margin:0 auto 34px; }
+  .btn-pastel { background:#ffb6c1; color:#6b3e50; padding:15px 36px; border-radius:30px; font-weight:700; font-size:14px; display:inline-block; }
+
+  section { padding:90px 0; }
+  .section-label { text-align:center; font-size:13px; font-weight:700; letter-spacing:2px; margin-bottom:14px; opacity:0.7; }
+  .section-title { text-align:center; font-size:clamp(26px,5vw,40px); font-weight:800; max-width:600px; margin:0 auto 50px; }
+
+  .products-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .product-card { background:rgba(255,255,255,0.6); border-radius:28px; padding:30px; text-align:center; transition:0.3s; }
+  .product-card:hover { transform:translateY(-8px); }
+  .product-swatch { width:75px; height:75px; border-radius:50%; margin:0 auto 16px; }
+  .product-card:nth-child(1) .product-swatch { background:linear-gradient(135deg,#ffb6c1,#ffd6e8); }
+  .product-card:nth-child(2) .product-swatch { background:linear-gradient(135deg,#a8d8ea,#d6e8ff); }
+  .product-card:nth-child(3) .product-swatch { background:linear-gradient(135deg,#b5e8b5,#e0ffd6); }
+  .product-card h3 { font-size:17px; margin-bottom:8px; } .product-card p { font-size:13px; opacity:0.8; margin-bottom:10px; }
+  .price { font-weight:700; }
+  @media (max-width:768px) { .products-grid { grid-template-columns:1fr; } }
+
+  .testimonial-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .t-card { background:rgba(255,255,255,0.5); border-radius:20px; padding:26px; }
+  .t-card p { font-size:14px; margin-bottom:14px; } .t-card strong { font-size:13px; }
+  @media (max-width:768px) { .testimonial-grid { grid-template-columns:1fr; } }
+
+  .cta-final { text-align:center; padding:90px 24px; }
+  .cta-final h2 { font-size:clamp(26px,5vw,38px); margin-bottom:30px; }
+
+  footer { padding:50px 24px 30px; background:rgba(255,255,255,0.3); }
+  .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:30px; margin-bottom:34px; }
+  .footer-col h5 { font-size:12px; margin-bottom:14px; letter-spacing:1px; text-transform:uppercase; opacity:0.7; }
+  .footer-col a { display:block; font-size:14px; margin-bottom:8px; }
+  .footer-bottom { text-align:center; font-size:13px; opacity:0.7; padding-top:20px; }
+  @media (max-width:768px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← Back to Showcase</a>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">BLOOM</div>
+    <div class="nav-links"><a href="#shop">Shop</a><a href="#reviews">Reviews</a></div>
+    <a href="#shop" class="nav-cta">Shop Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Wellness starts here 🌸</h1>
+  <p>Gentle, effective skincare made with ingredients you can actually pronounce.</p>
+  <a href="#shop" class="btn-pastel">Shop Skincare</a>
+</section>
+
+<section id="shop">
+  <div class="container">
+    <div class="section-label reveal">BESTSELLERS</div>
+    <h2 class="section-title reveal">Skincare that loves you back</h2>
+    <div class="products-grid">
+      <div class="product-card reveal"><div class="product-swatch"></div><h3>Rose Glow Serum</h3><p>Hydrating & brightening</p><div class="price">$34.00</div></div>
+      <div class="product-card reveal"><div class="product-swatch"></div><h3>Calm Cloud Cream</h3><p>Soothes sensitive skin</p><div class="price">$28.00</div></div>
+      <div class="product-card reveal"><div class="product-swatch"></div><h3>Fresh Mint Cleanser</h3><p>Gentle daily cleanse</p><div class="price">$22.00</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="container">
+    <div class="section-label reveal">REVIEWS</div>
+    <h2 class="section-title reveal">Loved by 50,000+ happy customers</h2>
+    <div class="testimonial-grid">
+      <div class="t-card reveal"><p>"My skin has never felt this soft. The serum is magic."</p><strong>— Ava M.</strong></div>
+      <div class="t-card reveal"><p>"Finally a brand that doesn't irritate my sensitive skin."</p><strong>— Priya S.</strong></div>
+      <div class="t-card reveal"><p>"The packaging is so cute AND it actually works!"</p><strong>— Lily R.</strong></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-final">
+  <h2 class="reveal">Your skin deserves this.</h2>
+  <a href="#shop" class="btn-pastel">Start Your Routine</a>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><div class="logo">BLOOM</div><p style="font-size:13px;margin-top:12px;opacity:0.8;">Gentle skincare, real results.</p></div>
+      <div class="footer-col"><h5>Shop</h5><a href="#">All Products</a><a href="#">Bundles</a></div>
+      <div class="footer-col"><h5>About</h5><a href="#">Our Story</a><a href="#">Ingredients</a></div>
+      <div class="footer-col"><h5>Connect</h5><a href="#">Instagram</a><a href="#">Newsletter</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 BLOOM Skincare.</div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.15 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

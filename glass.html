@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAULT — Banking Built on Trust</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', -apple-system, sans-serif; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:#fff; min-height:100vh; }
+  a { text-decoration:none; color:inherit; }
+  .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+  .reveal { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
+  .reveal.show { opacity:1; transform:translateY(0); }
+  .glass { background:rgba(255,255,255,0.12); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.25); border-radius:20px; }
+
+  nav.glass { position:fixed; top:0; left:0; right:0; z-index:100; border-radius:0; border:none; border-bottom:1px solid rgba(255,255,255,0.15); }
+  .nav-inner { display:flex; justify-content:space-between; align-items:center; padding:18px 24px; max-width:1100px; margin:0 auto; }
+  .logo { font-size:20px; font-weight:800; }
+  .nav-links { display:flex; gap:30px; font-size:14px; opacity:0.9; }
+  .nav-cta { background:#fff; color:#764ba2; padding:10px 22px; border-radius:10px; font-size:13px; font-weight:700; }
+  .back-link { position:fixed; bottom:20px; left:20px; z-index:100; font-size:12px; background:rgba(0,0,0,0.3); color:#fff; padding:8px 14px; border-radius:20px; }
+  .mobile-toggle { display:none; background:none; border:none; color:#fff; font-size:22px; }
+  @media (max-width:768px) { .nav-links { display:none; } .mobile-toggle { display:block; } }
+
+  .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 24px 60px; }
+  .hero h1 { font-size:clamp(34px,7vw,60px); font-weight:800; max-width:760px; margin-bottom:22px; }
+  .hero p { opacity:0.9; font-size:clamp(15px,3vw,17px); max-width:520px; margin:0 auto 36px; }
+  .btn-white { background:#fff; color:#764ba2; padding:15px 34px; border-radius:12px; font-weight:700; font-size:14px; }
+  .card-preview { margin-top:60px; padding:40px; width:100%; max-width:420px; text-align:left; }
+  .card-preview .balance-label { font-size:12px; opacity:0.7; }
+  .card-preview .balance { font-size:36px; font-weight:800; margin:10px 0 20px; }
+  .card-row { display:flex; justify-content:space-between; font-size:13px; padding:10px 0; border-top:1px solid rgba(255,255,255,0.15); }
+
+  section { padding:100px 0; }
+  .section-label { text-align:center; font-size:13px; font-weight:700; letter-spacing:2px; opacity:0.85; margin-bottom:14px; }
+  .section-title { text-align:center; font-size:clamp(26px,5vw,40px); font-weight:800; max-width:650px; margin:0 auto 60px; }
+
+  .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .feature-card { padding:34px; text-align:center; }
+  .feature-icon { font-size:32px; margin-bottom:16px; }
+  .feature-card h3 { font-size:18px; margin-bottom:10px; }
+  .feature-card p { opacity:0.85; font-size:14px; line-height:1.6; }
+  @media (max-width:768px) { .features-grid { grid-template-columns:1fr; } }
+
+  .form-section { max-width:480px; margin:0 auto; padding:50px; text-align:center; }
+  .glass-input { width:100%; padding:14px 18px; border-radius:12px; border:none; background:rgba(255,255,255,0.2); color:#fff; margin-bottom:14px; font-size:14px; }
+  .glass-input::placeholder { color:rgba(255,255,255,0.7); }
+  .btn-full { width:100%; padding:14px; background:#fff; color:#764ba2; border:none; border-radius:12px; font-weight:700; font-size:14px; }
+
+  footer { padding:60px 24px 30px; border-top:1px solid rgba(255,255,255,0.15); }
+  .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:30px; margin-bottom:40px; }
+  .footer-col h5 { font-size:12px; opacity:0.7; margin-bottom:16px; letter-spacing:1px; text-transform:uppercase; }
+  .footer-col a { display:block; font-size:14px; margin-bottom:10px; opacity:0.9; }
+  .footer-bottom { text-align:center; font-size:13px; opacity:0.6; padding-top:24px; border-top:1px solid rgba(255,255,255,0.15); }
+  @media (max-width:768px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← Back to Showcase</a>
+
+<nav class="glass">
+  <div class="nav-inner">
+    <div class="logo">VAULT</div>
+    <div class="nav-links"><a href="#features">Features</a><a href="#security">Security</a></div>
+    <a href="#signup" class="nav-cta">Open Account</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Banking built on clarity, not confusion.</h1>
+  <p>VAULT gives you full transparency into your money — no hidden fees, no fine print.</p>
+  <a href="#signup" class="btn-white">Open Your Free Account</a>
+  <div class="card-preview glass">
+    <div class="balance-label">TOTAL BALANCE</div>
+    <div class="balance">$24,582.10</div>
+    <div class="card-row"><span>Savings</span><span>$18,200.00</span></div>
+    <div class="card-row"><span>Checking</span><span>$6,382.10</span></div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <div class="section-label reveal">WHY VAULT</div>
+    <h2 class="section-title reveal">Clarity through transparency</h2>
+    <div class="features-grid">
+      <div class="feature-card glass reveal"><div class="feature-icon">💳</div><h3>Zero Hidden Fees</h3><p>What you see is what you pay. Always.</p></div>
+      <div class="feature-card glass reveal" id="security"><div class="feature-icon">🔐</div><h3>Bank-Level Security</h3><p>256-bit encryption and biometric login.</p></div>
+      <div class="feature-card glass reveal"><div class="feature-icon">📱</div><h3>Instant Transfers</h3><p>Send and receive money in seconds.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="signup">
+  <div class="form-section glass reveal">
+    <h2 style="font-size:28px;margin-bottom:12px;">Get Early Access</h2>
+    <p style="opacity:0.85;margin-bottom:24px;font-size:14px;">Join thousands already banking smarter with VAULT.</p>
+    <input class="glass-input" placeholder="Enter your email">
+    <button class="btn-full">Open My Account</button>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><div class="logo">VAULT</div><p style="opacity:0.7;font-size:13px;margin-top:14px;">Banking, reimagined for trust.</p></div>
+      <div class="footer-col"><h5>Product</h5><a href="#">Features</a><a href="#">Security</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="#">About</a><a href="#">Careers</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 VAULT Inc. Member FDIC.</div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.15 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

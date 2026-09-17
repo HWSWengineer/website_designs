@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LAUNCHPAD — Learn Skills That Matter</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', -apple-system, sans-serif; background:#fff; color:#111; }
+  a { text-decoration:none; color:inherit; }
+  .reveal { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
+  .reveal.show { opacity:1; transform:translateY(0); }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(255,255,255,0.95); backdrop-filter:blur(10px); border-bottom:1px solid #eee; }
+  .nav-inner { display:flex; justify-content:space-between; align-items:center; padding:18px 24px; max-width:1100px; margin:0 auto; }
+  .logo { font-size:20px; font-weight:800; }
+  .nav-links { display:flex; gap:30px; font-size:14px; }
+  .nav-cta { background:#111; color:#fff; padding:10px 22px; border-radius:4px; font-size:13px; font-weight:600; }
+  .back-link { position:fixed; bottom:20px; left:20px; z-index:100; font-size:12px; background:#111; color:#fff; padding:8px 14px; border-radius:20px; }
+  .mobile-toggle { display:none; background:none; border:none; font-size:22px; }
+  @media (max-width:768px) { .nav-links { display:none; } .mobile-toggle { display:block; } }
+
+  .split-row { display:flex; min-height:90vh; align-items:stretch; }
+  .split-row.reverse { flex-direction:row-reverse; }
+  .split-half { flex:1; display:flex; flex-direction:column; justify-content:center; padding:60px; }
+  .split-visual { flex:1; display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; text-align:center; padding:20px; }
+  .v1 { background:linear-gradient(135deg,#667eea,#764ba2); }
+  .v2 { background:linear-gradient(135deg,#ff6b6b,#f7b733); }
+  .v3 { background:linear-gradient(135deg,#00b894,#00cec9); }
+  .split-half .tag-small { color:#0066ff; font-size:13px; font-weight:700; margin-bottom:14px; }
+  .split-half h2 { font-size:clamp(28px,5vw,42px); margin-bottom:18px; line-height:1.15; }
+  .split-half p { color:#666; margin-bottom:24px; font-size:15px; line-height:1.6; }
+  .btn-split { background:#111; color:#fff; padding:14px 32px; border-radius:4px; font-weight:600; width:fit-content; }
+  @media (max-width:768px) { .split-row, .split-row.reverse { flex-direction:column; } .split-visual { min-height:220px; } }
+
+  .stats-banner { background:#111; color:#fff; text-align:center; padding:70px 24px; display:flex; justify-content:center; gap:60px; flex-wrap:wrap; }
+  .stat h2 { font-size:36px; } .stat p { font-size:12px; opacity:0.7; margin-top:6px; }
+
+  footer { padding:50px 24px 30px; border-top:1px solid #eee; }
+  .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:30px; margin-bottom:34px; max-width:1100px; margin-left:auto; margin-right:auto; }
+  .footer-col h5 { font-size:12px; color:#999; margin-bottom:14px; letter-spacing:1px; text-transform:uppercase; }
+  .footer-col a { display:block; font-size:14px; margin-bottom:8px; color:#555; }
+  .footer-bottom { text-align:center; font-size:13px; color:#999; padding-top:20px; border-top:1px solid #eee; }
+  @media (max-width:768px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← Back to Showcase</a>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">LAUNCHPAD</div>
+    <div class="nav-links"><a href="#courses">Courses</a><a href="#how">How It Works</a></div>
+    <a href="#courses" class="nav-cta">Browse Courses</a>
+  </div>
+</nav>
+
+<div class="split-row">
+  <div class="split-half">
+    <div class="tag-small">LEARN AT YOUR PACE</div>
+    <h2>Skills that actually move your career forward.</h2>
+    <p>LAUNCHPAD connects you with industry experts teaching the exact skills companies are hiring for right now.</p>
+    <a href="#courses" class="btn-split">Explore Courses</a>
+  </div>
+  <div class="split-visual v1">[ Hero Course Preview ]</div>
+</div>
+
+<div class="split-row reverse reveal" id="courses">
+  <div class="split-half">
+    <div class="tag-small">TOP RATED</div>
+    <h2>Courses taught by people who've actually done it.</h2>
+    <p>No theory-only instructors. Every course is taught by practitioners currently working in the field.</p>
+    <a href="#" class="btn-split">See All Instructors</a>
+  </div>
+  <div class="split-visual v2">[ Instructor Spotlight ]</div>
+</div>
+
+<div class="split-row reveal" id="how">
+  <div class="split-half">
+    <div class="tag-small">FLEXIBLE LEARNING</div>
+    <h2>Learn on your schedule, not ours.</h2>
+    <p>Lifetime access to every course you enroll in — go at your own pace, revisit anytime.</p>
+    <a href="#" class="btn-split">Start Learning Today</a>
+  </div>
+  <div class="split-visual v3">[ Mobile Learning Preview ]</div>
+</div>
+
+<div class="stats-banner">
+  <div class="stat reveal"><h2>500K+</h2><p>Students Enrolled</p></div>
+  <div class="stat reveal"><h2>1,200+</h2><p>Courses Available</p></div>
+  <div class="stat reveal"><h2>4.8★</h2><p>Average Rating</p></div>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col"><div class="logo">LAUNCHPAD</div><p style="color:#999;font-size:13px;margin-top:12px;">Learn skills that matter.</p></div>
+    <div class="footer-col"><h5>Learn</h5><a href="#">Courses</a><a href="#">Paths</a></div>
+    <div class="footer-col"><h5>Company</h5><a href="#">About</a><a href="#">Careers</a></div>
+    <div class="footer-col"><h5>Support</h5><a href="#">Help Center</a><a href="#">Contact</a></div>
+  </div>
+  <div class="footer-bottom">© 2025 LAUNCHPAD Inc.</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.15 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAWR — Unapologetic Streetwear</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:Arial, sans-serif; background:#fff59d; color:#000; }
+  a { text-decoration:none; color:inherit; }
+  .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+  .reveal { opacity:0; transform:translateY(20px); transition:all 0.5s ease; }
+  .reveal.show { opacity:1; transform:translateY(0); }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:#fff59d; border-bottom:5px solid #000; }
+  .nav-inner { display:flex; justify-content:space-between; align-items:center; padding:18px 24px; max-width:1100px; margin:0 auto; }
+  .logo { font-size:26px; font-weight:900; text-transform:uppercase; }
+  .nav-links { display:flex; gap:30px; font-size:14px; font-weight:700; text-transform:uppercase; }
+  .nav-cta { background:#ff5252; border:3px solid #000; padding:9px 20px; font-weight:800; text-transform:uppercase; box-shadow:4px 4px 0 #000; font-size:13px; }
+  .back-link { position:fixed; bottom:20px; left:20px; z-index:100; font-size:12px; background:#000; color:#fff; padding:8px 14px; font-weight:700; }
+  .mobile-toggle { display:none; background:none; border:none; font-size:22px; }
+  @media (max-width:768px) { .nav-links { display:none; } .mobile-toggle { display:block; } }
+
+  .hero { min-height:90vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 24px 60px; }
+  .hero h1 { font-size:clamp(40px,9vw,90px); font-weight:900; text-transform:uppercase; line-height:0.95; max-width:900px; margin-bottom:24px; }
+  .hero p { font-size:clamp(14px,3vw,17px); max-width:480px; margin:0 auto 30px; border-top:3px solid #000; border-bottom:3px solid #000; padding:14px 0; font-weight:600; }
+  .btn-brutal { background:#ff5252; border:4px solid #000; padding:16px 38px; font-weight:900; text-transform:uppercase; box-shadow:6px 6px 0 #000; transition:0.15s; display:inline-block; }
+  .btn-brutal:hover { transform:translate(3px,3px); box-shadow:3px 3px 0 #000; }
+
+  section { padding:90px 0; }
+  .section-title { text-align:center; font-size:clamp(28px,6vw,48px); font-weight:900; text-transform:uppercase; margin-bottom:50px; }
+
+  .products-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .product-card { background:#fff; border:4px solid #000; box-shadow:8px 8px 0 #000; }
+  .product-img { height:220px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; color:#fff; }
+  .product-card:nth-child(1) .product-img { background:#6c5ce7; }
+  .product-card:nth-child(2) .product-img { background:#00b894; }
+  .product-card:nth-child(3) .product-img { background:#e17055; }
+  .product-info { padding:20px; border-top:4px solid #000; }
+  .product-info h3 { font-size:16px; text-transform:uppercase; margin-bottom:6px; }
+  .product-info p { font-size:14px; font-weight:800; }
+  @media (max-width:768px) { .products-grid { grid-template-columns:1fr; } }
+
+  .marquee { background:#000; color:#fff59d; padding:20px 0; overflow:hidden; white-space:nowrap; font-weight:900; text-transform:uppercase; font-size:22px; }
+  .marquee-content { display:inline-block; animation:scroll 15s linear infinite; }
+  @keyframes scroll { 0%{transform:translateX(0);} 100%{transform:translateX(-50%);} }
+
+  .cta-banner { text-align:center; padding:90px 24px; background:#ff5252; border-top:5px solid #000; border-bottom:5px solid #000; }
+  .cta-banner h2 { font-size:clamp(28px,6vw,48px); font-weight:900; text-transform:uppercase; margin-bottom:30px; color:#fff; }
+  .btn-black { background:#000; color:#fff59d; padding:16px 38px; font-weight:900; text-transform:uppercase; border:none; }
+
+  footer { padding:50px 24px 30px; }
+  .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:30px; margin-bottom:30px; }
+  .footer-col h5 { font-size:13px; margin-bottom:14px; text-transform:uppercase; font-weight:900; }
+  .footer-col a { display:block; font-size:14px; margin-bottom:8px; font-weight:600; }
+  .footer-bottom { text-align:center; font-size:13px; font-weight:700; padding-top:20px; border-top:3px solid #000; }
+  @media (max-width:768px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← BACK</a>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">RAWR</div>
+    <div class="nav-links"><a href="#shop">Shop</a><a href="#about">About</a></div>
+    <a href="#shop" class="nav-cta">Shop Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>No Fluff.<br>Just Results.</h1>
+  <p>RAW, HONEST, UNAPOLOGETICALLY BOLD STREETWEAR FOR PEOPLE WHO DON'T BLEND IN.</p>
+  <a href="#shop" class="btn-brutal">SHOP THE DROP</a>
+</section>
+
+<div class="marquee"><div class="marquee-content">NEW DROP EVERY FRIDAY — LIMITED STOCK — NO RESTOCKS — NEW DROP EVERY FRIDAY — LIMITED STOCK — NO RESTOCKS — </div></div>
+
+<section id="shop">
+  <div class="container">
+    <h2 class="section-title reveal">Latest Drop</h2>
+    <div class="products-grid">
+      <div class="product-card reveal"><div class="product-img">HOODIE 01</div><div class="product-info"><h3>Oversized Hoodie</h3><p>$68.00</p></div></div>
+      <div class="product-card reveal"><div class="product-img">TEE 02</div><div class="product-info"><h3>Graphic Tee</h3><p>$38.00</p></div></div>
+      <div class="product-card reveal"><div class="product-img">CAP 03</div><div class="product-info"><h3>Logo Cap</h3><p>$28.00</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner" id="about">
+  <h2 class="reveal">Join The Movement</h2>
+  <a href="#" class="btn-black">Get 10% Off</a>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><div class="logo">RAWR</div><p style="font-size:13px;margin-top:12px;font-weight:600;">Unfiltered streetwear.</p></div>
+      <div class="footer-col"><h5>Shop</h5><a href="#">New</a><a href="#">Bestsellers</a></div>
+      <div class="footer-col"><h5>Info</h5><a href="#">Shipping</a><a href="#">Returns</a></div>
+      <div class="footer-col"><h5>Follow</h5><a href="#">Instagram</a><a href="#">TikTok</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 RAWR. NO REFUNDS ON ATTITUDE.</div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.15 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

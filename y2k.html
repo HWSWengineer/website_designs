@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLOW — Beauty For The Bold</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', -apple-system, sans-serif; background:linear-gradient(135deg,#c9a7ff,#9ad9ff,#ffc9f0); color:#4a4a6a; overflow-x:hidden; }
+  a { text-decoration:none; color:inherit; }
+  .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+  .reveal { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
+  .reveal.show { opacity:1; transform:translateY(0); }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(255,255,255,0.25); backdrop-filter:blur(15px); }
+  .nav-inner { display:flex; justify-content:space-between; align-items:center; padding:18px 24px; max-width:1100px; margin:0 auto; }
+  .logo { font-size:24px; font-weight:900; font-family:'Arial Black',sans-serif; background:linear-gradient(180deg,#fff 0%,#b8c6db 40%,#fff 50%,#8ec5fc 100%); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .nav-links { display:flex; gap:28px; font-size:14px; font-weight:700; }
+  .nav-cta { background:rgba(255,255,255,0.5); border:2px solid #fff; padding:9px 22px; border-radius:30px; font-weight:700; font-size:13px; }
+  .back-link { position:fixed; bottom:20px; left:20px; z-index:100; font-size:12px; background:rgba(74,74,106,0.8); color:#fff; padding:8px 14px; border-radius:20px; }
+  .mobile-toggle { display:none; background:none; border:none; font-size:22px; }
+  @media (max-width:768px) { .nav-links { display:none; } .mobile-toggle { display:block; } }
+
+  .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 24px 60px; position:relative; }
+  .bubble { border-radius:50%; background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,182,255,0.2)); position:absolute; }
+  .b1 { top:12%; left:8%; width:120px; height:120px; } .b2 { bottom:15%; right:8%; width:90px; height:90px; } .b3 { top:60%; left:5%; width:50px; height:50px; }
+  .hero h1 { font-size:clamp(40px,9vw,80px); font-weight:900; font-family:'Arial Black',sans-serif; background:linear-gradient(180deg,#fff 0%,#b8c6db 40%,#fff 50%,#8ec5fc 100%); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:18px; z-index:1; line-height:1; }
+  .hero p { font-weight:600; max-width:480px; margin:0 auto 34px; z-index:1; font-size:clamp(14px,3vw,17px); }
+  .btn-y2k { padding:16px 42px; border-radius:50px; border:2px solid #fff; background:rgba(255,255,255,0.5); backdrop-filter:blur(5px); color:#4a4a6a; font-weight:800; z-index:1; display:inline-block; }
+
+  section { padding:90px 0; position:relative; z-index:1; }
+  .section-label { text-align:center; font-size:13px; font-weight:800; letter-spacing:2px; margin-bottom:14px; }
+  .section-title { text-align:center; font-size:clamp(26px,5vw,42px); font-weight:900; max-width:600px; margin:0 auto 50px; }
+
+  .products-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .product-card { background:rgba(255,255,255,0.4); backdrop-filter:blur(10px); border:2px solid rgba(255,255,255,0.6); border-radius:24px; padding:30px; text-align:center; transition:0.3s; }
+  .product-card:hover { transform:translateY(-8px); }
+  .product-swatch { width:70px; height:70px; border-radius:50%; margin:0 auto 16px; }
+  .product-card:nth-child(1) .product-swatch { background:linear-gradient(135deg,#ff9a9e,#fecfef); }
+  .product-card:nth-child(2) .product-swatch { background:linear-gradient(135deg,#a18cd1,#fbc2eb); }
+  .product-card:nth-child(3) .product-swatch { background:linear-gradient(135deg,#84fab0,#8fd3f4); }
+  .product-card h3 { font-size:17px; margin-bottom:8px; } .product-card p { font-size:13px; font-weight:600; opacity:0.8; }
+  @media (max-width:768px) { .products-grid { grid-template-columns:1fr; } }
+
+  .testimonial-strip { display:flex; gap:20px; overflow-x:auto; padding:10px 0; }
+  .t-card { flex:0 0 260px; background:rgba(255,255,255,0.4); backdrop-filter:blur(10px); border-radius:20px; padding:24px; }
+  .t-card p { font-size:13px; font-weight:600; margin-bottom:14px; }
+  .t-card strong { font-size:13px; }
+
+  .cta-banner { text-align:center; padding:90px 24px; }
+  .cta-banner h2 { font-size:clamp(28px,6vw,44px); font-weight:900; font-family:'Arial Black',sans-serif; margin-bottom:26px; }
+
+  footer { padding:50px 24px 30px; background:rgba(255,255,255,0.2); }
+  .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:30px; margin-bottom:34px; }
+  .footer-col h5 { font-size:12px; margin-bottom:14px; letter-spacing:1px; text-transform:uppercase; font-weight:800; }
+  .footer-col a { display:block; font-size:14px; margin-bottom:8px; font-weight:600; }
+  .footer-bottom { text-align:center; font-size:13px; padding-top:20px; border-top:1px solid rgba(74,74,106,0.2); font-weight:600; }
+  @media (max-width:768px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← Back to Showcase</a>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">GLOW</div>
+    <div class="nav-links"><a href="#shop">Shop</a><a href="#reviews">Reviews</a></div>
+    <a href="#shop" class="nav-cta">Shop Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div>
+  <h1>PLUG INTO<br>YOUR GLOW</h1>
+  <p>Y2K-inspired beauty that hits different. Chrome, shimmer, and confidence — bottled up.</p>
+  <a href="#shop" class="btn-y2k">SHOP THE DROP</a>
+</section>
+
+<section id="shop">
+  <div class="container">
+    <div class="section-label reveal">BESTSELLERS</div>
+    <h2 class="section-title reveal">Products that hit different</h2>
+    <div class="products-grid">
+      <div class="product-card reveal"><div class="product-swatch"></div><h3>Holo Highlighter</h3><p>$24.00</p></div>
+      <div class="product-card reveal"><div class="product-swatch"></div><h3>Chrome Lip Gloss</h3><p>$18.00</p></div>
+      <div class="product-card reveal"><div class="product-swatch"></div><h3>Glitter Body Mist</h3><p>$22.00</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="container">
+    <div class="section-label reveal">REVIEWS</div>
+    <h2 class="section-title reveal">Loved by the internet</h2>
+    <div class="testimonial-strip">
+      <div class="t-card reveal"><p>"This highlighter is unreal. Literally glowing 24/7 now."</p><strong>@mia.does.makeup</strong></div>
+      <div class="t-card reveal"><p>"The chrome gloss lives up to the hype. Obsessed."</p><strong>@zoeglows</strong></div>
+      <div class="t-card reveal"><p>"Packaging alone deserves 5 stars. Product is 🔥 too."</p><strong>@retrobabe</strong></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <h2 class="reveal">Your glow up starts now.</h2>
+  <a href="#shop" class="btn-y2k">SHOP ALL PRODUCTS</a>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><div class="logo">GLOW</div><p style="font-size:13px;margin-top:12px;font-weight:600;">Beauty for the bold.</p></div>
+      <div class="footer-col"><h5>Shop</h5><a href="#">New</a><a href="#">Bestsellers</a></div>
+      <div class="footer-col"><h5>Info</h5><a href="#">Shipping</a><a href="#">Returns</a></div>
+      <div class="footer-col"><h5>Follow</h5><a href="#">TikTok</a><a href="#">Instagram</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 GLOW Beauty Co.</div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.15 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

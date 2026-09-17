@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORBIT — Analytics That Move With You</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', -apple-system, sans-serif; background:#12122a; color:#fff; }
+  a { text-decoration:none; color:inherit; }
+  .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+  .reveal { opacity:0; transform:translateY(30px); transition:all 0.7s ease; }
+  .reveal.show { opacity:1; transform:translateY(0); }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(18,18,42,0.85); backdrop-filter:blur(10px); border-bottom:1px solid rgba(255,255,255,0.08); }
+  .nav-inner { display:flex; justify-content:space-between; align-items:center; padding:18px 24px; max-width:1100px; margin:0 auto; }
+  .logo { font-size:20px; font-weight:800; }
+  .logo span { background:linear-gradient(90deg,#a29bfe,#74b9ff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .nav-links { display:flex; gap:30px; font-size:14px; color:#b2b2d0; }
+  .nav-cta { background:linear-gradient(90deg,#a29bfe,#74b9ff); color:#fff; padding:10px 22px; border-radius:8px; font-size:13px; font-weight:600; }
+  .back-link { position:fixed; bottom:20px; left:20px; z-index:100; font-size:12px; background:rgba(255,255,255,0.1); color:#fff; padding:8px 14px; border-radius:20px; }
+  .mobile-toggle { display:none; background:none; border:none; color:#fff; font-size:22px; }
+  @media (max-width:768px) { .nav-links { display:none; } .mobile-toggle { display:block; } }
+
+  .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 24px 60px; perspective:1200px; }
+  .hero-badge { border:1px solid rgba(162,155,254,0.4); color:#a29bfe; font-size:12px; padding:6px 16px; border-radius:20px; margin-bottom:24px; }
+  .hero h1 { font-size:clamp(36px,7vw,64px); font-weight:800; line-height:1.15; max-width:780px; margin-bottom:22px; }
+  .hero h1 span { background:linear-gradient(90deg,#a29bfe,#74b9ff); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero p { color:#b2b2d0; font-size:clamp(15px,3vw,17px); max-width:540px; margin:0 auto 36px; }
+  .btn-primary { background:linear-gradient(90deg,#a29bfe,#74b9ff); color:#fff; padding:15px 34px; border-radius:10px; font-weight:600; font-size:14px; box-shadow:0 10px 30px rgba(116,185,255,0.3); }
+  .btn-secondary { border:1.5px solid rgba(255,255,255,0.2); color:#fff; padding:15px 34px; border-radius:10px; font-size:14px; margin-left:12px; }
+
+  .dash-preview { margin-top:70px; width:100%; max-width:800px; }
+  .dash-card { background:linear-gradient(145deg,#2c2c54,#1a1a2e); border-radius:20px; padding:40px; box-shadow:20px 20px 60px rgba(0,0,0,0.4),-10px -10px 40px rgba(162,155,254,0.05); transform:rotateX(4deg); border:1px solid rgba(255,255,255,0.08); }
+  .dash-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:20px; }
+  .dash-metric { background:rgba(255,255,255,0.04); border-radius:12px; padding:16px; text-align:left; }
+  .dash-metric h4 { font-size:22px; color:#a29bfe; } .dash-metric p { font-size:11px; color:#8888aa; margin-top:4px; }
+
+  section { padding:100px 0; }
+  .section-label { text-align:center; font-size:13px; font-weight:700; color:#a29bfe; letter-spacing:2px; margin-bottom:14px; }
+  .section-title { text-align:center; font-size:clamp(26px,5vw,40px); font-weight:800; max-width:650px; margin:0 auto 60px; }
+
+  .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .feature-card { background:linear-gradient(145deg,#1e1e3f,#171730); border-radius:18px; padding:34px; border:1px solid rgba(255,255,255,0.06); transition:0.4s; }
+  .feature-card:hover { transform:translateY(-10px); box-shadow:0 20px 50px rgba(162,155,254,0.15); }
+  .feature-icon { font-size:30px; margin-bottom:16px; }
+  .feature-card h3 { font-size:18px; margin-bottom:10px; }
+  .feature-card p { color:#9999bb; font-size:14px; line-height:1.6; }
+  @media (max-width:768px) { .features-grid { grid-template-columns:1fr; } }
+
+  .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .price-card { background:linear-gradient(145deg,#1e1e3f,#171730); border:1px solid rgba(255,255,255,0.08); border-radius:18px; padding:34px; text-align:center; }
+  .price-card.featured { border-color:#a29bfe; transform:scale(1.05); box-shadow:0 20px 50px rgba(162,155,254,0.2); }
+  .price-card h3 { color:#9999bb; font-size:16px; }
+  .amount { font-size:38px; font-weight:800; margin:16px 0; }
+  .amount span { font-size:13px; color:#9999bb; font-weight:400; }
+  .price-list { list-style:none; margin:20px 0; text-align:left; font-size:13px; color:#ccc; }
+  .price-list li { padding:7px 0; } .price-list li::before { content:'✓ '; color:#a29bfe; }
+  .btn-price { width:100%; padding:12px; border-radius:8px; border:1.5px solid #a29bfe; color:#a29bfe; background:transparent; font-weight:600; }
+  .price-card.featured .btn-price { background:linear-gradient(90deg,#a29bfe,#74b9ff); color:#fff; border:none; }
+  @media (max-width:768px) { .pricing-grid { grid-template-columns:1fr; } .price-card.featured { transform:none; } }
+
+  .cta-banner { text-align:center; background:linear-gradient(135deg,rgba(162,155,254,0.1),rgba(116,185,255,0.1)); padding:90px 24px; border-top:1px solid rgba(255,255,255,0.06); }
+  .cta-banner h2 { font-size:clamp(26px,5vw,40px); margin-bottom:30px; }
+
+  footer { padding:60px 24px 30px; border-top:1px solid rgba(255,255,255,0.06); }
+  .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:30px; margin-bottom:40px; }
+  .footer-col h5 { font-size:12px; color:#8888aa; margin-bottom:16px; letter-spacing:1px; text-transform:uppercase; }
+  .footer-col a { display:block; font-size:14px; margin-bottom:10px; color:#ccc; }
+  .footer-bottom { text-align:center; font-size:13px; color:#7777aa; padding-top:24px; border-top:1px solid rgba(255,255,255,0.06); }
+  @media (max-width:768px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← Back to Showcase</a>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">OR<span>BIT</span></div>
+    <div class="nav-links"><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="#dashboard">Dashboard</a></div>
+    <a href="#pricing" class="nav-cta">Start Free Trial</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">📊 New: Predictive analytics is here</div>
+  <h1>Analytics that <span>move with you</span>, not against you.</h1>
+  <p>ORBIT gives your team a single source of truth — real-time, layered, and built for fast decisions.</p>
+  <div>
+    <a href="#pricing" class="btn-primary">Start Free Trial</a>
+    <a href="#dashboard" class="btn-secondary">See Dashboard</a>
+  </div>
+  <div class="dash-preview" id="dashboard">
+    <div class="dash-card">
+      <strong style="font-size:14px;color:#9999bb;">LIVE OVERVIEW</strong>
+      <div class="dash-grid">
+        <div class="dash-metric"><h4>2.4M</h4><p>Events Tracked</p></div>
+        <div class="dash-metric"><h4>98.2%</h4><p>Data Accuracy</p></div>
+        <div class="dash-metric"><h4>+34%</h4><p>Growth This Month</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <div class="section-label reveal">FEATURES</div>
+    <h2 class="section-title reveal">Depth of insight, without the complexity</h2>
+    <div class="features-grid">
+      <div class="feature-card reveal"><div class="feature-icon">⚡</div><h3>Real-Time Sync</h3><p>Data updates the instant it happens — no refresh, no delay.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🧠</div><h3>Predictive Models</h3><p>See trends before they happen with built-in forecasting.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🔗</div><h3>50+ Integrations</h3><p>Connect your entire stack in a few clicks.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="background:rgba(255,255,255,0.02);">
+  <div class="container">
+    <div class="section-label reveal">PRICING</div>
+    <h2 class="section-title reveal">Plans that scale with your data</h2>
+    <div class="pricing-grid">
+      <div class="price-card reveal"><h3>Starter</h3><div class="amount">$29<span>/mo</span></div><ul class="price-list"><li>Up to 50K events</li><li>Basic dashboards</li></ul><button class="btn-price">Get Started</button></div>
+      <div class="price-card featured reveal"><h3>Growth</h3><div class="amount">$99<span>/mo</span></div><ul class="price-list"><li>Up to 1M events</li><li>Predictive analytics</li><li>Priority support</li></ul><button class="btn-price">Get Started</button></div>
+      <div class="price-card reveal"><h3>Enterprise</h3><div class="amount">Custom</div><ul class="price-list"><li>Unlimited events</li><li>Dedicated support</li></ul><button class="btn-price">Contact Sales</button></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <h2 class="reveal">See your data in a new dimension.</h2>
+  <a href="#pricing" class="btn-primary">Start Your Free Trial</a>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><div class="logo">OR<span>BIT</span></div><p style="color:#8888aa;font-size:13px;margin-top:14px;">Analytics infrastructure for modern teams.</p></div>
+      <div class="footer-col"><h5>Product</h5><a href="#">Features</a><a href="#">Pricing</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="#">About</a><a href="#">Blog</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 ORBIT Inc.</div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.15 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>

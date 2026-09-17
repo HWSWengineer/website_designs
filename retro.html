@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ember & Oak — Craft Coffee Roastery</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:Georgia, serif; background:#f5ecd9; color:#5c3d2e; }
+  a { text-decoration:none; color:inherit; }
+  .container { max-width:1000px; margin:0 auto; padding:0 24px; }
+  .reveal { opacity:0; transform:translateY(30px); transition:all 0.8s ease; }
+  .reveal.show { opacity:1; transform:translateY(0); }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(245,236,217,0.95); border-bottom:2px solid #5c3d2e; }
+  .nav-inner { display:flex; justify-content:space-between; align-items:center; padding:18px 24px; max-width:1000px; margin:0 auto; }
+  .logo { font-size:20px; font-weight:700; letter-spacing:1px; }
+  .nav-links { display:flex; gap:28px; font-size:14px; }
+  .nav-cta { background:#c1502e; color:#fff8ec; padding:9px 20px; font-size:13px; letter-spacing:0.5px; }
+  .back-link { position:fixed; bottom:20px; left:20px; z-index:100; font-size:12px; background:#5c3d2e; color:#fff8ec; padding:8px 14px; border-radius:20px; }
+  .mobile-toggle { display:none; background:none; border:none; font-size:22px; }
+  @media (max-width:768px) { .nav-links { display:none; } .mobile-toggle { display:block; } }
+
+  .hero { min-height:90vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 24px 60px; }
+  .retro-sun { width:120px; height:120px; border-radius:50%; background:linear-gradient(180deg,#ff6b35,#f7c548); margin-bottom:-30px; }
+  .hero-box { background:#fff8ec; border:3px solid #5c3d2e; padding:50px 60px; max-width:600px; }
+  .hero h1 { font-size:clamp(28px,6vw,48px); margin-bottom:16px; }
+  .hero p { font-size:clamp(14px,3vw,17px); margin-bottom:26px; line-height:1.6; }
+  .btn-retro { background:#c1502e; color:#fff8ec; border:none; padding:14px 32px; font-family:Georgia,serif; font-size:14px; letter-spacing:1px; display:inline-block; }
+
+  section { padding:90px 0; }
+  .section-label { text-align:center; font-size:13px; letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; opacity:0.7; }
+  .section-title { text-align:center; font-size:clamp(26px,5vw,38px); margin-bottom:50px; }
+
+  .products-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .product-card { background:#fff8ec; border:2px solid #5c3d2e; padding:26px; text-align:center; }
+  .product-swatch { width:70px; height:70px; border-radius:50%; margin:0 auto 16px; }
+  .product-card:nth-child(1) .product-swatch { background:#8b5a2b; }
+  .product-card:nth-child(2) .product-swatch { background:#c1502e; }
+  .product-card:nth-child(3) .product-swatch { background:#d4a24c; }
+  .product-card h3 { font-size:17px; margin-bottom:6px; }
+  .product-card p { font-size:13px; opacity:0.8; margin-bottom:10px; }
+  .product-price { font-weight:700; }
+  @media (max-width:768px) { .products-grid { grid-template-columns:1fr; } }
+
+  .story-section { display:flex; align-items:center; gap:50px; flex-wrap:wrap; }
+  .story-visual { flex:1; min-width:260px; height:280px; background:linear-gradient(135deg,#8b5a2b,#5c3d2e); }
+  .story-text { flex:1; min-width:260px; }
+  .story-text p { line-height:1.8; margin-bottom:16px; }
+  @media (max-width:768px) { .story-section { flex-direction:column; } }
+
+  .cta-banner { text-align:center; background:#5c3d2e; color:#fff8ec; padding:90px 24px; }
+  .cta-banner h2 { font-size:clamp(26px,5vw,38px); margin-bottom:26px; }
+  .btn-cream { background:#fff8ec; color:#5c3d2e; padding:14px 32px; font-size:14px; letter-spacing:1px; display:inline-block; }
+
+  footer { padding:50px 24px 30px; border-top:2px solid #5c3d2e; }
+  .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:30px; margin-bottom:34px; }
+  .footer-col h5 { font-size:12px; text-transform:uppercase; margin-bottom:14px; letter-spacing:1px; }
+  .footer-col a { display:block; font-size:14px; margin-bottom:8px; }
+  .footer-bottom { text-align:center; font-size:13px; opacity:0.7; padding-top:20px; border-top:1px solid #d4c4a8; }
+  @media (max-width:768px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<a href="index.html" class="back-link">← Back to Showcase</a>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">EMBER & OAK</div>
+    <div class="nav-links"><a href="#shop">Shop</a><a href="#story">Our Story</a></div>
+    <a href="#shop" class="nav-cta">Order Now</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="retro-sun"></div>
+  <div class="hero-box">
+    <h1>Good things, made slow.</h1>
+    <p>Small-batch coffee, roasted the old-fashioned way — with care, patience, and zero shortcuts.</p>
+    <a href="#shop" class="btn-retro">SHOP OUR ROASTS</a>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="container">
+    <div class="section-label reveal">OUR ROASTS</div>
+    <h2 class="section-title reveal">Small batches, big flavor</h2>
+    <div class="products-grid">
+      <div class="product-card reveal"><div class="product-swatch"></div><h3>Morning Ritual</h3><p>Medium roast, notes of caramel & oak</p><div class="product-price">$18.00</div></div>
+      <div class="product-card reveal"><div class="product-swatch"></div><h3>Ember Dark</h3><p>Bold roast, smoky & rich</p><div class="product-price">$19.00</div></div>
+      <div class="product-card reveal"><div class="product-swatch"></div><h3>Golden Hour</h3><p>Light roast, fruity & bright</p><div class="product-price">$20.00</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="story" style="background:#fff8ec;">
+  <div class="container">
+    <div class="story-section">
+      <div class="story-visual reveal"></div>
+      <div class="story-text reveal">
+        <div class="section-label" style="text-align:left;">OUR STORY</div>
+        <h2 style="font-size:28px;margin-bottom:16px;">Rooted in tradition, roasted with purpose</h2>
+        <p>Ember & Oak started in a small garage roastery in 2015. Today, we still roast in small batches, source directly from farmers we know by name, and never rush the process.</p>
+        <p>Every bag tells a story — of the farm, the roast, and the hands that got it to your cup.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <h2 class="reveal">Your next favorite cup is one click away.</h2>
+  <a href="#" class="btn-cream">Shop All Roasts</a>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col"><div class="logo">EMBER & OAK</div><p style="font-size:13px;margin-top:12px;opacity:0.8;">Craft coffee, roasted slow.</p></div>
+      <div class="footer-col"><h5>Shop</h5><a href="#">All Roasts</a><a href="#">Subscriptions</a></div>
+      <div class="footer-col"><h5>About</h5><a href="#">Our Story</a><a href="#">Farmers</a></div>
+      <div class="footer-col"><h5>Connect</h5><a href="#">Instagram</a><a href="#">Newsletter</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 Ember & Oak Roastery.</div>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: 0.15 });
+  reveals.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
