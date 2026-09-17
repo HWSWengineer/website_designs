@@ -3,182 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>15 Landing Page Styles — Fullpage Push Scroll</title>
+<title>15 Landing Page Styles — Showcase</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   html, body { height:100%; overflow:hidden; overscroll-behavior:none; }
   body { font-family:'Segoe UI', -apple-system, sans-serif; }
-  button { font-family:inherit; cursor:pointer; }
+  a { text-decoration:none; }
 
-  /* ===== FULLPAGE MECHANISM ===== */
-  #fullpage-container {
-    position:fixed; top:0; left:0; width:100%;
-    height:100vh; height:100dvh; overflow:hidden;
-  }
-  .fp-section {
-    position:absolute; top:0; left:0; width:100%;
-    height:100%; display:flex; align-items:center; justify-content:center;
-    padding:110px 20px 50px; overflow:hidden;
-    transition: transform 0.9s cubic-bezier(0.83,0,0.17,1);
-    will-change: transform;
-  }
+  #fullpage-container { position:fixed; top:0; left:0; width:100%; height:100vh; height:100dvh; overflow:hidden; }
+  .fp-section { position:absolute; top:0; left:0; width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:110px 20px 50px; overflow:hidden; transition: transform 0.9s cubic-bezier(0.83,0,0.17,1); will-change:transform; }
   .tag { position:absolute; top:16px; left:20px; font-size:10px; letter-spacing:2px; text-transform:uppercase; opacity:0.55; }
   .card-3d, .brutal-box, .glass-card, .neu-card, .pastel-card, .retro-content { max-width:100%; }
 
-  /* ===== TOP NAV (swipeable strip) ===== */
   .nav { position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(10,10,10,0.92); backdrop-filter:blur(10px); padding:10px 15px; display:flex; gap:6px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
   .nav::-webkit-scrollbar { display:none; }
-  .nav a { flex:0 0 auto; color:#fff; text-decoration:none; font-size:11px; padding:6px 12px; border-radius:20px; transition:0.25s; white-space:nowrap; }
+  .nav a { flex:0 0 auto; color:#fff; font-size:11px; padding:6px 12px; border-radius:20px; transition:0.25s; white-space:nowrap; }
   .nav a:hover, .nav a.active { background:rgba(255,255,255,0.25); }
   @media (min-width:900px) { .nav { flex-wrap:wrap; overflow-x:visible; justify-content:center; } }
 
-  /* ===== DOT NAVIGATION ===== */
-  .dot-nav {
-    position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:1000;
-    display:flex; flex-direction:column; gap:9px;
-    background:rgba(0,0,0,0.25); padding:12px 7px; border-radius:20px; backdrop-filter:blur(6px);
-  }
+  .dot-nav { position:fixed; right:16px; top:50%; transform:translateY(-50%); z-index:1000; display:flex; flex-direction:column; gap:9px; background:rgba(0,0,0,0.25); padding:12px 7px; border-radius:20px; backdrop-filter:blur(6px); }
   .dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.45); border:none; transition:0.3s; padding:0; }
   .dot.active { background:#fff; transform:scale(1.4); }
   @media (max-width:480px) { .dot-nav { right:8px; gap:7px; padding:10px 5px; } .dot { width:6px; height:6px; } }
 
-  /* ===== PROGRESS COUNTER ===== */
   .progress { position:fixed; bottom:18px; left:20px; z-index:1000; color:#fff; font-size:12px; letter-spacing:1px; mix-blend-mode:difference; }
-
-  /* ===== SCROLL HINT (first section only) ===== */
-  .scroll-hint { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:999; font-size:12px; color:#000; opacity:0.6; letter-spacing:1px; animation:bounce 1.6s infinite; transition:opacity 0.4s; text-align:center; }
+  .scroll-hint { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); z-index:999; font-size:12px; color:#000; opacity:0.6; letter-spacing:1px; animation:bounce 1.6s infinite; transition:opacity 0.4s; }
   .scroll-hint.hide { opacity:0; pointer-events:none; }
   @keyframes bounce { 0%,100%{ transform:translateX(-50%) translateY(0); } 50%{ transform:translateX(-50%) translateY(8px); } }
 
-  /* ===== 1. BLACK & WHITE MINIMAL ===== */
+  /* CTA button base — consistent action across every style */
+  .cta { display:inline-block; padding:15px 34px; font-size:14px; font-weight:700; border-radius:6px; transition:0.3s; cursor:pointer; }
+
+  /* 1. B&W MINIMAL */
   #s1 { background:#fff; color:#000; flex-direction:column; text-align:center; }
   #s1 .label { letter-spacing:4px; font-size:clamp(10px,2.5vw,12px); margin-bottom:18px; color:#888; }
   #s1 h1 { font-size:clamp(32px,8vw,64px); font-weight:800; line-height:1.1; max-width:750px; margin-bottom:20px; }
   #s1 p { font-size:clamp(14px,3.5vw,17px); color:#555; max-width:480px; margin-bottom:30px; }
-  .btn-bw { padding:14px 32px; background:#000; color:#fff; border:none; font-size:13px; letter-spacing:1px; transition:0.3s; }
-  .btn-bw:hover { background:#333; transform:translateY(-2px); }
+  .cta-bw { background:#000; color:#fff; }
+  .cta-bw:hover { background:#333; transform:translateY(-2px); }
 
-  /* ===== 2. VIBRANT GRADIENT ===== */
+  /* 2. VIBRANT */
   #s2 { background:linear-gradient(135deg,#ff6b6b 0%,#f7b733 25%,#6c5ce7 60%,#00d2ff 100%); color:#fff; flex-direction:column; text-align:center; }
   #s2::before { content:''; position:absolute; width:300px; height:300px; background:rgba(255,255,255,0.15); border-radius:50%; top:-100px; left:-100px; filter:blur(40px); }
   #s2::after { content:''; position:absolute; width:250px; height:250px; background:rgba(255,255,255,0.15); border-radius:50%; bottom:-80px; right:-80px; filter:blur(40px); }
   #s2 h1 { font-size:clamp(30px,7.5vw,58px); font-weight:900; margin-bottom:18px; z-index:1; text-shadow:0 4px 20px rgba(0,0,0,0.2); }
   #s2 p { font-size:clamp(14px,3.5vw,18px); max-width:520px; margin-bottom:28px; z-index:1; }
-  .btn-vibrant { padding:15px 34px; background:#fff; color:#ff6b6b; border:none; border-radius:50px; font-size:14px; font-weight:700; z-index:1; box-shadow:0 10px 30px rgba(0,0,0,0.2); transition:0.3s; }
-  .btn-vibrant:hover { transform:scale(1.05) translateY(-3px); }
+  .cta-vibrant { background:#fff; color:#ff6b6b; border-radius:50px; z-index:1; box-shadow:0 10px 30px rgba(0,0,0,0.2); }
+  .cta-vibrant:hover { transform:scale(1.05) translateY(-3px); }
 
-  /* ===== 3. 3D DEPTH ===== */
+  /* 3. 3D DEPTH */
   #s3 { background:linear-gradient(180deg,#1a1a2e 0%,#16213e 100%); color:#fff; perspective:1000px; }
   .card-3d { background:linear-gradient(145deg,#2c2c54,#1a1a2e); padding:clamp(30px,6vw,55px) clamp(22px,5vw,55px); border-radius:20px; width:100%; max-width:560px; text-align:center; box-shadow:20px 20px 60px #0d0d1a,-20px -20px 60px #2a2a5c; transform:rotateY(-5deg) rotateX(5deg); transition:transform 0.4s; border:1px solid rgba(255,255,255,0.1); }
   .card-3d:hover { transform:rotateY(0) rotateX(0) translateY(-8px); }
   .card-3d h1 { font-size:clamp(24px,6vw,38px); margin-bottom:16px; background:linear-gradient(90deg,#a29bfe,#74b9ff); -webkit-background-clip:text; background-clip:text; color:transparent; }
   .card-3d p { color:#b2b2d0; margin-bottom:26px; font-size:clamp(13px,3vw,15px); }
-  .btn-3d { padding:14px 32px; background:linear-gradient(90deg,#a29bfe,#74b9ff); color:#fff; border:none; border-radius:10px; font-size:14px; font-weight:600; box-shadow:0 10px 30px rgba(116,185,255,0.4); transition:0.3s; }
-  .btn-3d:hover { transform:translateY(-3px); }
+  .cta-3d { background:linear-gradient(90deg,#a29bfe,#74b9ff); color:#fff; border-radius:10px; box-shadow:0 10px 30px rgba(116,185,255,0.4); }
+  .cta-3d:hover { transform:translateY(-3px); }
 
-  /* ===== 4. INTERACTIVE CARDS ===== */
+  /* 4. INTERACTIVE */
   #s4 { background:#f4f4f9; flex-direction:column; text-align:center; }
   #s4 h1 { font-size:clamp(28px,6vw,48px); margin-bottom:16px; color:#2d3436; }
   #s4 p { font-size:clamp(13px,3vw,16px); color:#636e72; max-width:480px; margin-bottom:30px; }
-  .int-grid { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .int-grid { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-bottom:30px; }
   .int-card { background:#fff; padding:24px; border-radius:16px; flex:1 1 140px; max-width:190px; box-shadow:0 5px 20px rgba(0,0,0,0.05); transition:all 0.3s; border:2px solid transparent; }
   .int-card:hover { transform:translateY(-8px) scale(1.03); box-shadow:0 20px 40px rgba(108,92,231,0.2); border-color:#6c5ce7; }
   .int-card .icon { font-size:30px; margin-bottom:10px; transition:transform 0.3s; }
   .int-card:hover .icon { transform:scale(1.2) rotate(10deg); }
   .int-card h3 { color:#2d3436; font-size:14px; margin-bottom:6px; }
   .int-card p { font-size:12px; color:#999; margin:0; }
+  .cta-interactive { background:#6c5ce7; color:#fff; border-radius:50px; }
+  .cta-interactive:hover { transform:translateY(-3px); box-shadow:0 10px 25px rgba(108,92,231,0.4); }
 
-  /* ===== 5. DARK NEON ===== */
+  /* 5. DARK NEON */
   #s5 { background:#0a0e17; color:#fff; flex-direction:column; text-align:center; }
   #s5 .grid-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(0,255,200,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,200,0.05) 1px,transparent 1px); background-size:40px 40px; }
   #s5 h1 { font-size:clamp(30px,7vw,54px); font-weight:800; z-index:1; margin-bottom:18px; text-shadow:0 0 10px #00ffc8,0 0 20px #00ffc8,0 0 40px #00ffc8; }
   #s5 p { z-index:1; color:#8b95a5; max-width:480px; margin-bottom:28px; font-size:clamp(13px,3vw,16px); }
-  .btn-neon { z-index:1; padding:14px 32px; background:transparent; color:#00ffc8; border:2px solid #00ffc8; border-radius:6px; font-size:14px; transition:0.3s; text-shadow:0 0 10px #00ffc8; }
-  .btn-neon:hover { background:#00ffc8; color:#0a0e17; box-shadow:0 0 30px #00ffc8; text-shadow:none; }
+  .cta-neon { background:transparent; color:#00ffc8; border:2px solid #00ffc8; z-index:1; text-shadow:0 0 10px #00ffc8; }
+  .cta-neon:hover { background:#00ffc8; color:#0a0e17; box-shadow:0 0 30px #00ffc8; text-shadow:none; }
 
-  /* ===== 6. GLASSMORPHISM ===== */
+  /* 6. GLASSMORPHISM */
   #s6 { background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); }
   .glass-card { background:rgba(255,255,255,0.15); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.3); border-radius:24px; padding:clamp(30px,6vw,55px) clamp(22px,5vw,55px); width:100%; max-width:520px; text-align:center; color:#fff; box-shadow:0 8px 32px rgba(0,0,0,0.2); }
   .glass-card h1 { font-size:clamp(26px,6vw,40px); margin-bottom:16px; }
   .glass-card p { margin-bottom:24px; opacity:0.9; font-size:clamp(13px,3vw,15px); }
-  .glass-input { width:100%; padding:13px 18px; border-radius:12px; border:none; background:rgba(255,255,255,0.2); color:#fff; margin-bottom:14px; font-size:14px; }
-  .glass-input::placeholder { color:rgba(255,255,255,0.7); }
-  .btn-glass { width:100%; padding:13px; background:#fff; color:#764ba2; border:none; border-radius:12px; font-size:14px; font-weight:700; transition:0.3s; }
-  .btn-glass:hover { transform:translateY(-2px); }
+  .cta-glass { width:100%; background:#fff; color:#764ba2; border-radius:12px; padding:14px; }
+  .cta-glass:hover { transform:translateY(-2px); }
 
-  /* ===== 7. NEO-BRUTALIST ===== */
+  /* 7. BRUTALIST */
   #s7 { background:#fff59d; }
   .brutal-box { background:#fff; border:5px solid #000; padding:clamp(25px,6vw,50px); width:100%; max-width:560px; box-shadow:8px 8px 0 #000; }
   .brutal-box h1 { font-size:clamp(26px,7vw,48px); font-weight:900; text-transform:uppercase; margin-bottom:16px; line-height:1; }
   .brutal-box p { font-size:clamp(13px,3vw,15px); margin-bottom:20px; border-top:3px solid #000; border-bottom:3px solid #000; padding:14px 0; }
-  .btn-brutal { background:#ff5252; border:4px solid #000; padding:12px 28px; font-weight:800; text-transform:uppercase; box-shadow:4px 4px 0 #000; transition:0.15s; }
-  .btn-brutal:hover { transform:translate(3px,3px); box-shadow:1px 1px 0 #000; }
+  .cta-brutal { background:#ff5252; border:4px solid #000; text-transform:uppercase; box-shadow:4px 4px 0 #000; }
+  .cta-brutal:hover { transform:translate(3px,3px); box-shadow:1px 1px 0 #000; }
 
-  /* ===== 8. RETRO/VINTAGE ===== */
+  /* 8. RETRO */
   #s8 { background:#f5ecd9; color:#5c3d2e; flex-direction:column; text-align:center; }
   .retro-sun { width:100px; height:100px; border-radius:50%; background:linear-gradient(180deg,#ff6b35,#f7c548); margin-bottom:-25px; z-index:0; }
   .retro-content { background:#fff8ec; border:3px solid #5c3d2e; padding:clamp(30px,6vw,45px) clamp(24px,5vw,55px); z-index:1; width:100%; max-width:520px; }
   #s8 h1 { font-family:Georgia,serif; font-size:clamp(24px,6vw,44px); margin-bottom:14px; }
   #s8 p { font-family:Georgia,serif; font-size:clamp(13px,3vw,16px); margin-bottom:20px; }
-  .btn-retro { background:#c1502e; color:#fff8ec; border:none; padding:12px 28px; font-family:Georgia,serif; font-size:13px; letter-spacing:1px; }
+  .cta-retro { background:#c1502e; color:#fff8ec; font-family:Georgia,serif; letter-spacing:1px; }
 
-  /* ===== 9. Y2K ===== */
+  /* 9. Y2K */
   #s9 { background:linear-gradient(135deg,#c9a7ff,#9ad9ff,#ffc9f0); flex-direction:column; text-align:center; }
   .y2k-bubble { border-radius:50%; background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,182,255,0.2)); position:absolute; }
   .b1 { top:8%; left:6%; width:110px; height:110px; }
   .b2 { bottom:10%; right:6%; width:80px; height:80px; }
   #s9 h1 { font-size:clamp(30px,7.5vw,58px); font-weight:900; font-family:'Arial Black',sans-serif; background:linear-gradient(180deg,#fff 0%,#b8c6db 40%,#fff 50%,#8ec5fc 100%); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:16px; z-index:1; }
   #s9 p { color:#4a4a6a; max-width:480px; margin-bottom:26px; z-index:1; font-weight:600; font-size:clamp(13px,3vw,16px); }
-  .btn-y2k { padding:14px 34px; border-radius:50px; border:2px solid #fff; background:rgba(255,255,255,0.4); backdrop-filter:blur(5px); color:#4a4a6a; font-weight:700; z-index:1; }
+  .cta-y2k { border-radius:50px; border:2px solid #fff; background:rgba(255,255,255,0.4); backdrop-filter:blur(5px); color:#4a4a6a; z-index:1; }
 
-  /* ===== 10. NEUMORPHISM ===== */
+  /* 10. NEUMORPHISM */
   #s10 { background:#e0e5ec; flex-direction:column; text-align:center; }
   .neu-card { background:#e0e5ec; padding:clamp(30px,6vw,55px); border-radius:30px; box-shadow:20px 20px 60px #bebebe,-20px -20px 60px #ffffff; width:100%; max-width:520px; }
   #s10 h1 { color:#3d4451; font-size:clamp(26px,6vw,42px); margin-bottom:16px; }
   #s10 p { color:#6b7280; margin-bottom:26px; font-size:clamp(13px,3vw,15px); }
-  .btn-neu { background:#e0e5ec; border:none; padding:14px 32px; border-radius:50px; box-shadow:8px 8px 16px #bebebe,-8px -8px 16px #ffffff; color:#3d4451; font-weight:600; transition:0.2s; }
-  .btn-neu:active { box-shadow:inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; }
+  .cta-neu { background:#e0e5ec; box-shadow:8px 8px 16px #bebebe,-8px -8px 16px #ffffff; color:#3d4451; border-radius:50px; }
+  .cta-neu:active { box-shadow:inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff; }
 
-  /* ===== 11. BENTO GRID ===== */
+  /* 11. BENTO */
   #s11 { background:#f7f7f8; flex-direction:column; }
   #s11 h1 { font-size:clamp(22px,5.5vw,38px); margin-bottom:24px; color:#111; text-align:center; }
-  .bento-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,130px); gap:12px; max-width:850px; width:100%; }
+  .bento-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(2,130px); gap:12px; max-width:850px; width:100%; margin-bottom:26px; }
   .bento-item { background:#fff; border-radius:18px; padding:20px; box-shadow:0 2px 10px rgba(0,0,0,0.06); font-size:13px; color:#555; }
   .bento-item.big { grid-column:span 2; grid-row:span 2; background:linear-gradient(135deg,#000,#333); color:#fff; display:flex; flex-direction:column; justify-content:flex-end; font-size:14px; }
   .bento-item.wide { grid-column:span 2; }
   .bento-item strong { display:block; font-size:15px; margin-bottom:6px; }
+  .bento-cta-wrap { text-align:center; width:100%; }
+  .cta-bento { background:#111; color:#fff; border-radius:6px; }
+  .cta-bento:hover { transform:translateY(-2px); }
 
-  /* ===== 12. CORPORATE ===== */
+  /* 12. CORPORATE */
   #s12 { background:#fff; flex-direction:column; text-align:center; }
   #s12 h1 { color:#0a2540; font-size:clamp(26px,6vw,46px); margin-bottom:14px; }
   #s12 p { color:#556; margin-bottom:28px; max-width:480px; font-size:clamp(13px,3vw,16px); }
-  .btn-corp { background:#0066ff; color:#fff; padding:13px 32px; border:none; border-radius:6px; font-weight:600; font-size:14px; }
+  .cta-corp { background:#0066ff; color:#fff; border-radius:6px; }
   .corp-stats { display:flex; gap:30px; flex-wrap:wrap; justify-content:center; margin-top:34px; border-top:1px solid #eee; padding-top:22px; }
   .corp-stat h2 { color:#0066ff; font-size:clamp(24px,5vw,32px); }
   .corp-stat p { color:#888; font-size:12px; margin:0; }
 
-  /* ===== 13. PASTEL ===== */
+  /* 13. PASTEL */
   #s13 { background:linear-gradient(135deg,#ffd6e8,#d6e8ff,#e0ffd6); flex-direction:column; text-align:center; }
   .pastel-card { background:rgba(255,255,255,0.65); border-radius:32px; padding:clamp(30px,6vw,55px); width:100%; max-width:520px; }
   #s13 h1 { color:#6b5b95; font-size:clamp(26px,6vw,42px); margin-bottom:14px; }
   #s13 p { color:#7a6b8f; margin-bottom:24px; font-size:clamp(13px,3vw,15px); }
-  .btn-pastel { background:#ffb6c1; color:#6b3e50; padding:13px 32px; border:none; border-radius:30px; font-weight:700; }
+  .cta-pastel { background:#ffb6c1; color:#6b3e50; border-radius:30px; }
 
-  /* ===== 14. SPLIT-SCREEN ===== */
+  /* 14. SPLIT */
   #s14 { padding:0; align-items:stretch; flex-direction:row; }
   .split-left { flex:1; display:flex; flex-direction:column; justify-content:center; padding:clamp(30px,6vw,60px); background:#fff; }
   .split-left h1 { font-size:clamp(26px,6vw,42px); color:#111; margin-bottom:14px; }
   .split-left p { color:#666; margin-bottom:22px; font-size:clamp(13px,3vw,16px); }
-  .btn-split { background:#111; color:#fff; padding:13px 30px; border:none; border-radius:4px; font-weight:600; width:fit-content; }
+  .cta-split { background:#111; color:#fff; border-radius:4px; width:fit-content; }
   .split-right { flex:1; background:linear-gradient(135deg,#667eea,#764ba2); display:flex; align-items:center; justify-content:center; color:#fff; font-size:clamp(14px,3vw,18px); text-align:center; padding:20px; }
 
-  /* ===== 15. BOLD TYPOGRAPHY ===== */
+  /* 15. BOLD TYPE */
   #s15 { background:#fff200; flex-direction:column; align-items:flex-start; text-align:left; padding-left:clamp(24px,6vw,60px); }
   #s15 h1 { font-size:clamp(38px,12vw,88px); font-weight:900; line-height:0.95; color:#000; max-width:800px; }
   #s15 p { font-size:clamp(14px,3.5vw,18px); margin-top:20px; max-width:500px; }
-  .btn-bold { margin-top:26px; background:#000; color:#fff200; padding:14px 34px; border:none; font-size:14px; font-weight:700; }
+  .cta-bold { background:#000; color:#fff200; margin-top:26px; }
 
-  /* ===== MOBILE FIXES ===== */
   @media (max-width:768px) {
     .fp-section { padding:80px 18px 40px; }
     .tag { font-size:9px; }
@@ -223,31 +209,31 @@
 <div id="fullpage-container">
 
   <section class="fp-section" id="s1">
-    <span class="tag">01 · Black & White Minimal</span>
+    <span class="tag">01 · Black & White Minimal — STUDIO</span>
     <div class="label">— NEW COLLECTION —</div>
     <h1>Design that speaks louder in silence.</h1>
     <p>A minimal approach for brands that let the work do the talking.</p>
-    <button class="btn-bw">EXPLORE</button>
+    <a class="cta cta-bw" href="minimal.html">Check Full Website →</a>
   </section>
 
   <section class="fp-section" id="s2">
-    <span class="tag" style="color:#fff;">02 · Vibrant Gradient</span>
+    <span class="tag" style="color:#fff;">02 · Vibrant Gradient — PULSE</span>
     <h1>Bring color to<br>everything you build.</h1>
     <p>The all-in-one platform for teams who refuse to be boring.</p>
-    <button class="btn-vibrant">Get Started Free</button>
+    <a class="cta cta-vibrant" href="vibrant.html">Check Full Website →</a>
   </section>
 
   <section class="fp-section" id="s3">
-    <span class="tag">03 · 3D / Depth</span>
+    <span class="tag">03 · 3D / Depth — ORBIT</span>
     <div class="card-3d">
       <h1>Depth changes everything</h1>
       <p>Layered design that makes your product feel premium and alive.</p>
-      <button class="btn-3d">Try It Now</button>
+      <a class="cta cta-3d" href="depth.html">Check Full Website →</a>
     </div>
   </section>
 
   <section class="fp-section" id="s4">
-    <span class="tag">04 · Interactive Cards</span>
+    <span class="tag">04 · Interactive Cards — FLOWSPACE</span>
     <div style="display:flex;flex-direction:column;align-items:center;">
       <h1>Hover. Click. Explore.</h1>
       <p>Every element responds — because engagement starts with interaction.</p>
@@ -256,44 +242,44 @@
         <div class="int-card"><div class="icon">🎯</div><h3>Precise</h3><p>Built for accuracy</p></div>
         <div class="int-card"><div class="icon">🔒</div><h3>Secure</h3><p>Bank-level security</p></div>
       </div>
+      <a class="cta cta-interactive" href="interactive.html">Check Full Website →</a>
     </div>
   </section>
 
   <section class="fp-section" id="s5">
     <div class="grid-bg"></div>
-    <span class="tag" style="color:#00ffc8;">05 · Dark Neon</span>
+    <span class="tag" style="color:#00ffc8;">05 · Dark Neon — NEXUS</span>
     <h1>ENTER THE FUTURE</h1>
     <p>Next-gen technology for teams building what's next.</p>
-    <button class="btn-neon">LAUNCH APP</button>
+    <a class="cta cta-neon" href="neon.html">Check Full Website →</a>
   </section>
 
   <section class="fp-section" id="s6">
-    <span class="tag" style="color:#fff;">06 · Glassmorphism</span>
+    <span class="tag" style="color:#fff;">06 · Glassmorphism — VAULT</span>
     <div class="glass-card">
       <h1>Clarity through transparency</h1>
-      <p>Sign up and see what frosted-glass design feels like.</p>
-      <input class="glass-input" placeholder="Enter your email">
-      <button class="btn-glass">Get Early Access</button>
+      <p>Bank smarter with a platform built on trust and transparency.</p>
+      <a class="cta cta-glass" href="glass.html">Check Full Website →</a>
     </div>
   </section>
 
   <section class="fp-section" id="s7">
-    <span class="tag">07 · Neo-Brutalist</span>
+    <span class="tag">07 · Neo-Brutalist — RAWR</span>
     <div class="brutal-box">
       <h1>NO FLUFF. JUST RESULTS.</h1>
       <p>Raw, honest, unapologetically bold design for brands that stand out.</p>
-      <button class="btn-brutal">SIGN UP NOW</button>
+      <a class="cta cta-brutal" href="brutalist.html">Check Full Website →</a>
     </div>
   </section>
 
   <section class="fp-section" id="s8">
-    <span class="tag">08 · Retro / Vintage</span>
+    <span class="tag">08 · Retro / Vintage — EMBER & OAK</span>
     <div style="display:flex;flex-direction:column;align-items:center;">
       <div class="retro-sun"></div>
       <div class="retro-content">
         <h1>Good things, made slow.</h1>
         <p>Crafted the old-fashioned way — with care, not shortcuts.</p>
-        <button class="btn-retro">DISCOVER MORE</button>
+        <a class="cta cta-retro" href="retro.html">Check Full Website →</a>
       </div>
     </div>
   </section>
@@ -301,23 +287,23 @@
   <section class="fp-section" id="s9">
     <div class="y2k-bubble b1"></div>
     <div class="y2k-bubble b2"></div>
-    <span class="tag">09 · Y2K / Retro-Futuristic</span>
+    <span class="tag">09 · Y2K — GLOW</span>
     <h1>PLUG INTO<br>TOMORROW</h1>
     <p>Chrome, bubbles, and a whole lot of early-internet nostalgia.</p>
-    <button class="btn-y2k">ENTER SITE</button>
+    <a class="cta cta-y2k" href="y2k.html">Check Full Website →</a>
   </section>
 
   <section class="fp-section" id="s10">
-    <span class="tag">10 · Neumorphism</span>
+    <span class="tag">10 · Neumorphism — CALM</span>
     <div class="neu-card">
       <h1>Soft. Subtle. Seamless.</h1>
       <p>An interface so smooth, it feels like it's carved from the screen itself.</p>
-      <button class="btn-neu">Continue</button>
+      <a class="cta cta-neu" href="neumorphism.html">Check Full Website →</a>
     </div>
   </section>
 
   <section class="fp-section" id="s11">
-    <span class="tag">11 · Bento Grid</span>
+    <span class="tag">11 · Bento Grid — GRIDLY</span>
     <h1>Everything you need, organized beautifully</h1>
     <div class="bento-grid">
       <div class="bento-item big"><strong>Analytics</strong>Real-time data at a glance</div>
@@ -326,13 +312,14 @@
       <div class="bento-item wide">🌍 Global CDN — 99.9% uptime</div>
       <div class="bento-item">📱 Mobile Ready</div>
     </div>
+    <div class="bento-cta-wrap"><a class="cta cta-bento" href="bento.html">Check Full Website →</a></div>
   </section>
 
   <section class="fp-section" id="s12">
-    <span class="tag">12 · Corporate / Professional</span>
+    <span class="tag">12 · Corporate — APEXCORP</span>
     <h1>Trusted by enterprise teams worldwide</h1>
     <p>Reliable, secure, and scalable solutions for businesses that can't afford downtime.</p>
-    <button class="btn-corp">Schedule a Demo</button>
+    <a class="cta cta-corp" href="corporate.html">Check Full Website →</a>
     <div class="corp-stats">
       <div class="corp-stat"><h2>10k+</h2><p>Companies</p></div>
       <div class="corp-stat"><h2>99.9%</h2><p>Uptime</p></div>
@@ -341,29 +328,29 @@
   </section>
 
   <section class="fp-section" id="s13">
-    <span class="tag">13 · Pastel / Soft</span>
+    <span class="tag">13 · Pastel — BLOOM</span>
     <div class="pastel-card">
       <h1>Wellness starts here 🌸</h1>
       <p>A gentle space designed to help you feel calm, cared for, and in control.</p>
-      <button class="btn-pastel">Start Your Journey</button>
+      <a class="cta cta-pastel" href="pastel.html">Check Full Website →</a>
     </div>
   </section>
 
   <section class="fp-section" id="s14">
     <div class="split-left">
-      <span class="tag" style="position:static;margin-bottom:20px;display:block;">14 · Split-Screen</span>
+      <span class="tag" style="position:static;margin-bottom:20px;display:block;">14 · Split-Screen — LAUNCHPAD</span>
       <h1>See both sides of the story</h1>
       <p>Half message, half visual — a layout that balances content and impact equally.</p>
-      <button class="btn-split">Learn More</button>
+      <a class="cta cta-split" href="split.html">Check Full Website →</a>
     </div>
     <div class="split-right">[ Image / Product Visual ]</div>
   </section>
 
   <section class="fp-section" id="s15">
-    <span class="tag">15 · Bold Typography</span>
+    <span class="tag">15 · Bold Typography — MAKE.</span>
     <h1>WORDS<br>ARE THE<br>DESIGN.</h1>
     <p>When your message is strong enough, it doesn't need decoration.</p>
-    <button class="btn-bold">READ MORE →</button>
+    <a class="cta cta-bold" href="bold.html">Check Full Website →</a>
   </section>
 
 </div>
@@ -375,12 +362,9 @@
   const navLinks = document.querySelectorAll('#topNav a');
   const progress = document.getElementById('progress');
   const scrollHint = document.getElementById('scrollHint');
+  let current = 0, animating = false;
+  const DURATION = 900;
 
-  let current = 0;
-  let animating = false;
-  const DURATION = 900; // matches CSS transition time
-
-  // Build dots dynamically
   for (let i = 0; i < total; i++) {
     const dot = document.createElement('button');
     dot.className = 'dot' + (i === 0 ? ' active' : '');
@@ -390,70 +374,41 @@
   const dots = document.querySelectorAll('.dot');
 
   function updateUI() {
-    sections.forEach((sec, i) => {
-      sec.style.transform = `translateY(${(i - current) * 100}%)`;
-    });
+    sections.forEach((sec, i) => { sec.style.transform = `translateY(${(i - current) * 100}%)`; });
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
     navLinks.forEach((a, i) => a.classList.toggle('active', i === current));
     progress.textContent = String(current + 1).padStart(2, '0') + ' / ' + total;
     scrollHint.classList.toggle('hide', current !== 0);
   }
-
   function goTo(index) {
     if (animating || index < 0 || index >= total || index === current) return;
-    current = index;
-    animating = true;
-    updateUI();
+    current = index; animating = true; updateUI();
     setTimeout(() => { animating = false; }, DURATION);
   }
-
   function next() { goTo(current + 1); }
   function prev() { goTo(current - 1); }
 
-  // ===== WHEEL (desktop) =====
   window.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    if (animating) return;
-    if (e.deltaY > 25) next();
-    else if (e.deltaY < -25) prev();
+    e.preventDefault(); if (animating) return;
+    if (e.deltaY > 25) next(); else if (e.deltaY < -25) prev();
   }, { passive: false });
 
-  // ===== TOUCH (mobile) =====
   let touchStartY = 0;
-  window.addEventListener('touchstart', (e) => {
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  window.addEventListener('touchmove', (e) => {
-    if (e.target.closest('.nav')) return; // allow horizontal nav swipe
-    e.preventDefault();
-  }, { passive: false });
-
+  window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+  window.addEventListener('touchmove', (e) => { if (e.target.closest('.nav')) return; e.preventDefault(); }, { passive: false });
   window.addEventListener('touchend', (e) => {
     if (animating) return;
-    const touchEndY = e.changedTouches[0].clientY;
-    const diff = touchStartY - touchEndY;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) next(); else prev();
-    }
+    const diff = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(diff) > 50) { if (diff > 0) next(); else prev(); }
   });
 
-  // ===== KEYBOARD =====
   window.addEventListener('keydown', (e) => {
     if (animating) return;
     if (e.key === 'ArrowDown' || e.key === 'PageDown') { next(); e.preventDefault(); }
     if (e.key === 'ArrowUp' || e.key === 'PageUp') { prev(); e.preventDefault(); }
   });
 
-  // ===== TOP NAV CLICKS =====
-  navLinks.forEach((a, i) => {
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      goTo(i);
-    });
-  });
-
-  // ===== INIT =====
+  navLinks.forEach((a, i) => { a.addEventListener('click', (e) => { e.preventDefault(); goTo(i); }); });
   updateUI();
 </script>
 </body>
