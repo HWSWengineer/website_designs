@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS — AI Infrastructure for Modern Teams</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', -apple-system, sans-serif; background:#0a0e17; color:#fff; }
+  a { text-decoration:none; color:inherit; }
+  .container { max-width:1100px; margin:0 auto; padding:0 24px; }
+  .grid-bg { position:fixed; inset:0; z-index:-1; background-image:linear-gradient(rgba(0,255,200,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,200,0.04) 1px,transparent 1px); background-size:40px 40px; }
+
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(10,14,23,0.85); backdrop-filter:blur(10px); border-bottom:1px solid rgba(0,255,200,0.15); }
+  .nav-inner { display:flex; justify-content:space-between; align-items:center; padding:18px 24px; max-width:1100px; margin:0 auto; }
+  .logo { font-size:20px; font-weight:800; letter-spacing:1px; }
+  .logo span { color:#00ffc8; }
+  .nav-links { display:flex; gap:30px; font-size:14px; color:#b0b8c8; }
+  .nav-links a:hover { color:#00ffc8; }
+  .nav-cta { background:transparent; border:1.5px solid #00ffc8; color:#00ffc8; padding:9px 20px; border-radius:6px; font-size:13px; transition:0.3s; }
+  .nav-cta:hover { background:#00ffc8; color:#0a0e17; }
+  .back-link { position:fixed; bottom:20px; left:20px; z-index:100; font-size:12px; color:#8b95a5; background:rgba(255,255,255,0.05); padding:8px 14px; border-radius:20px; border:1px solid rgba(255,255,255,0.1); }
+  .back-link:hover { color:#00ffc8; }
+  .mobile-toggle { display:none; background:none; border:none; color:#fff; font-size:22px; }
+  @media (max-width:768px) { .nav-links { display:none; } .mobile-toggle { display:block; } }
+
+  /* HERO */
+  .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 24px 80px; position:relative; overflow:hidden; }
+  .hero-badge { border:1px solid rgba(0,255,200,0.4); color:#00ffc8; font-size:12px; padding:6px 16px; border-radius:20px; margin-bottom:24px; }
+  .hero h1 { font-size:clamp(38px,7vw,72px); font-weight:800; line-height:1.1; max-width:800px; margin-bottom:22px; text-shadow:0 0 20px rgba(0,255,200,0.3); }
+  .hero h1 span { color:#00ffc8; text-shadow:0 0 20px #00ffc8,0 0 40px #00ffc8; }
+  .hero p { color:#8b95a5; font-size:clamp(15px,3vw,18px); max-width:560px; margin-bottom:36px; }
+  .hero-btns { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+  .btn-primary { background:#00ffc8; color:#0a0e17; padding:15px 34px; border-radius:6px; font-weight:700; font-size:14px; transition:0.3s; }
+  .btn-primary:hover { box-shadow:0 0 30px #00ffc8; transform:translateY(-2px); }
+  .btn-secondary { border:1.5px solid rgba(255,255,255,0.3); color:#fff; padding:15px 34px; border-radius:6px; font-size:14px; transition:0.3s; }
+  .btn-secondary:hover { border-color:#00ffc8; color:#00ffc8; }
+  .hero-stats { display:flex; gap:50px; margin-top:70px; flex-wrap:wrap; justify-content:center; }
+  .hero-stat h2 { color:#00ffc8; font-size:32px; }
+  .hero-stat p { color:#8b95a5; font-size:12px; margin-top:4px; }
+
+  /* SECTION SHARED */
+  section { padding:100px 0; position:relative; }
+  .section-label { color:#00ffc8; font-size:12px; letter-spacing:2px; text-transform:uppercase; text-align:center; margin-bottom:14px; }
+  .section-title { font-size:clamp(28px,5vw,42px); font-weight:800; text-align:center; max-width:700px; margin:0 auto 60px; }
+
+  /* FEATURES */
+  .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .feature-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:36px; transition:0.3s; }
+  .feature-card:hover { border-color:rgba(0,255,200,0.4); transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,255,200,0.08); }
+  .feature-icon { font-size:32px; margin-bottom:18px; }
+  .feature-card h3 { font-size:19px; margin-bottom:10px; }
+  .feature-card p { color:#8b95a5; font-size:14px; line-height:1.6; }
+  @media (max-width:768px) { .features-grid { grid-template-columns:1fr; } }
+
+  /* HOW IT WORKS */
+  .steps { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+  .step { flex:1; min-width:220px; text-align:center; }
+  .step-num { width:50px; height:50px; border-radius:50%; border:2px solid #00ffc8; color:#00ffc8; display:flex; align-items:center; justify-content:center; font-weight:700; margin:0 auto 18px; }
+  .step h4 { margin-bottom:10px; font-size:16px; }
+  .step p { color:#8b95a5; font-size:13px; }
+
+  /* TESTIMONIALS */
+  .testimonial-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .testimonial-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:30px; }
+  .testimonial-card p { color:#c5cbd6; font-size:14px; line-height:1.6; margin-bottom:20px; }
+  .testimonial-author { display:flex; align-items:center; gap:12px; }
+  .avatar { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#00ffc8,#0066ff); }
+  .author-info h5 { font-size:14px; } .author-info span { font-size:12px; color:#8b95a5; }
+  @media (max-width:768px) { .testimonial-grid { grid-template-columns:1fr; } }
+
+  /* PRICING */
+  .pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .price-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:36px; text-align:center; transition:0.3s; }
+  .price-card.featured { border-color:#00ffc8; background:rgba(0,255,200,0.05); transform:scale(1.05); }
+  .price-card h3 { font-size:18px; margin-bottom:6px; color:#8b95a5; }
+  .price-card .amount { font-size:42px; font-weight:800; margin:16px 0; }
+  .price-card .amount span { font-size:14px; color:#8b95a5; font-weight:400; }
+  .price-list { list-style:none; margin:24px 0; text-align:left; }
+  .price-list li { color:#c5cbd6; font-size:13px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .price-list li::before { content:'✓ '; color:#00ffc8; }
+  .btn-price { display:block; width:100%; padding:13px; border-radius:6px; font-weight:600; font-size:14px; border:1.5px solid #00ffc8; color:#00ffc8; background:transparent; transition:0.3s; }
+  .price-card.featured .btn-price { background:#00ffc8; color:#0a0e17; }
+  .btn-price:hover { box-shadow:0 0 20px rgba(0,255,200,0.4); }
+  @media (max-width:768px) { .pricing-grid { grid-template-columns:1fr; } .price-card.featured { transform:none; } }
+
+  /* CTA BANNER */
+  .cta-banner { text-align:center; background:linear-gradient(135deg,rgba(0,255,200,0.08),rgba(0,102,255,0.08)); border-top:1px solid rgba(0,255,200,0.2); border-bottom:1px solid rgba(0,255,200,0.2); padding:90px 24px; }
+  .cta-banner h2 { font-size:clamp(26px,5vw,40px); margin-bottom:16px; }
+  .cta-banner p { color:#8b95a5; margin-bottom:30px; }
+
+  /* FOOTER */
+  footer { padding:60px 24px 40px; border-top:1px solid rgba(255,255,255,0.08); }
+  .footer-grid { display:grid; grid-template-columns:2fr repeat(3,1fr); gap:30px; margin-bottom:40px; }
+  .footer-col h5 { font-size:13px; color:#8b95a5; margin-bottom:16px; text-transform:uppercase; letter-spacing:1px; }
+  .footer-col a { display:block; font-size:14px; color:#c5cbd6; margin-bottom:10px; }
+  .footer-col a:hover { color:#00ffc8; }
+  .footer-bottom { text-align:center; color:#5a6272; font-size:13px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.06); }
+  @media (max-width:768px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<a href="index.html" class="back-link">← Back to Showcase</a>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">NEX<span>US</span></div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Customers</a>
+    </div>
+    <a href="#pricing" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">🚀 Now supporting real-time inference</div>
+  <h1>Build the future with <span>AI infrastructure</span> that scales.</h1>
+  <p>NEXUS gives engineering teams the tools to deploy, monitor, and scale AI models without the operational headache.</p>
+  <div class="hero-btns">
+    <a href="#pricing" class="btn-primary">Start Free Trial</a>
+    <a href="#how" class="btn-secondary">See How It Works</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><h2>50M+</h2><p>API Calls / Day</p></div>
+    <div class="hero-stat"><h2>99.99%</h2><p>Uptime SLA</p></div>
+    <div class="hero-stat"><h2>120+</h2><p>Enterprise Clients</p></div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything you need to ship AI products faster</h2>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">⚡</div><h3>Real-Time Inference</h3><p>Sub-50ms response times powered by our global edge network.</p></div>
+      <div class="feature-card"><div class="feature-icon">🔐</div><h3>Enterprise Security</h3><p>SOC 2 Type II certified with end-to-end encryption by default.</p></div>
+      <div class="feature-card"><div class="feature-icon">📊</div><h3>Live Monitoring</h3><p>Track model performance, drift, and usage in real time.</p></div>
+      <div class="feature-card"><div class="feature-icon">🔌</div><h3>One-Click Integration</h3><p>Connect to your existing stack with pre-built SDKs.</p></div>
+      <div class="feature-card"><div class="feature-icon">🌍</div><h3>Global Scale</h3><p>Deploy across 12 regions with automatic failover.</p></div>
+      <div class="feature-card"><div class="feature-icon">🤖</div><h3>Model Agnostic</h3><p>Bring your own model or use ours — full flexibility.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="background:rgba(255,255,255,0.02);">
+  <div class="container">
+    <div class="section-label">Process</div>
+    <h2 class="section-title">Live in three steps</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h4>Connect</h4><p>Integrate NEXUS with your existing pipeline in minutes.</p></div>
+      <div class="step"><div class="step-num">2</div><h4>Deploy</h4><p>Push your models to production with zero downtime.</p></div>
+      <div class="step"><div class="step-num">3</div><h4>Scale</h4><p>Monitor and scale automatically as demand grows.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="container">
+    <div class="section-label">Testimonials</div>
+    <h2 class="section-title">Trusted by teams building what's next</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p>"NEXUS cut our deployment time from weeks to hours. It's the infrastructure we wish we'd built ourselves."</p>
+        <div class="testimonial-author"><div class="avatar"></div><div class="author-info"><h5>Sarah Chen</h5><span>CTO, Vectra AI</span></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p>"The monitoring tools alone are worth it. We caught a model drift issue before it hit production."</p>
+        <div class="testimonial-author"><div class="avatar"></div><div class="author-info"><h5>Marcus Lee</h5><span>Lead ML Engineer, Fintra</span></div></div>
+      </div>
+      <div class="testimonial-card">
+        <p>"Switched from building in-house infra to NEXUS. Best decision for our team's velocity this year."</p>
+        <div class="testimonial-author"><div class="avatar"></div><div class="author-info"><h5>Priya Patel</h5><span>VP Engineering, Loopr</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="background:rgba(255,255,255,0.02);">
+  <div class="container">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Simple pricing that scales with you</h2>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <h3>Starter</h3>
+        <div class="amount">$49<span>/mo</span></div>
+        <ul class="price-list"><li>100K API calls/mo</li><li>Community support</li><li>Basic monitoring</li></ul>
+        <button class="btn-price">Get Started</button>
+      </div>
+      <div class="price-card featured">
+        <h3>Pro</h3>
+        <div class="amount">$199<span>/mo</span></div>
+        <ul class="price-list"><li>2M API calls/mo</li><li>Priority support</li><li>Advanced monitoring</li><li>Custom integrations</li></ul>
+        <button class="btn-price">Get Started</button>
+      </div>
+      <div class="price-card">
+        <h3>Enterprise</h3>
+        <div class="amount">Custom</div>
+        <ul class="price-list"><li>Unlimited API calls</li><li>Dedicated support</li><li>SLA guarantee</li><li>On-prem option</li></ul>
+        <button class="btn-price">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-banner">
+  <h2>Ready to build what's next?</h2>
+  <p>Join 120+ teams already scaling with NEXUS.</p>
+  <a href="#pricing" class="btn-primary">Start Your Free Trial</a>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="logo">NEX<span>US</span></div>
+        <p style="color:#8b95a5;font-size:13px;margin-top:14px;">AI infrastructure built for scale.</p>
+      </div>
+      <div class="footer-col"><h5>Product</h5><a href="#">Features</a><a href="#">Pricing</a><a href="#">Docs</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a></div>
+      <div class="footer-col"><h5>Legal</h5><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Security</a></div>
+    </div>
+    <div class="footer-bottom">© 2025 NEXUS Inc. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
